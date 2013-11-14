@@ -344,7 +344,7 @@ if (!current_user_can('manage_options'))  {
             	
             	<!-- Start Import Subscribers -->		
 				<div id="list_import" class="postbox" style="width: 100%">
-	            	<h3 class="hndle"><span>Import Subscribers <small><em>(No More than 5000 subscribers can be imported in a single week)</em></small></span></h3>
+	            	<h3 class="hndle"><span>Import Subscribers <small><em>(No More than 5,000 subscribers can be imported in a single week)</em></small></span></h3>
 	                <div class="inside" style="padding:15px">
 		            	<div id="pagedata" style="width:100%;min-height:100px">
 		                	<form action="" method="post">
@@ -364,9 +364,8 @@ if (!current_user_can('manage_options'))  {
 		                    		</select>
 		                    	</p>
 		                    	<p><input type="submit" class="button-primary" name="submit" value="<?php _e("Import Subscribers", 'wpcp'); ?> &raquo;" /></p>
-		                    	<p><small>Copy and Paste your Subscriber list into the textarea above.</small></p>
-		                    	<p><small>Format: Email Address, First Name, Last Name</small></p>
-		                    	<p><small>Your import will be placed into a queue and processed in the order in which it was received. You will receive an email when the list has been processed.</small></p>
+		                    	<p><small>Copy and Paste your Subscriber list into the textarea above. Your import will be placed into a queue and processed in the order in which it was received. You will receive an email when the list has been processed. The format is a comma separated list in the following order: <em>Email Address, First Name*, Last Name*, Daily*, Weekly* (*optional)</em></small> <code><strong>Example:</strong> test@domain.com, John, Smith, 0, 1</code> - <small>this will subscribe someone to on demand emails and the weekly digest.</small>
+		                    	</p>
 		                    </form>
 		                    	
 		          		</div>

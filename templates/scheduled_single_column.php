@@ -309,20 +309,16 @@ The header image for this template should be 200x50
 						
 						$posts = new WP_Query( $wpcp_args );
 						while ( $posts->have_posts() ) : $posts->the_post();
-							set_post_thumbnail_size( 75, 75, true );
+							set_post_thumbnail_size( 100, 100, true );
 					
 					?>
 					<!-- content -->
 					<div class="content">	
 						<table bgcolor="">
 							<tr> 
-								<?php if( strlen( the_post_thumbnail() ) > 0 ){
-									?>
-										<td class="small" width="20%" style="vertical-align: top; padding-right:10px;"><?php the_post_thumbnail(); ?></td>
-									<?php
-									}
-								?>
+								
 								<td>				
+									<?php the_post_thumbnail(); ?>
 									<a href="<?php the_permalink_rss() ?>" title="<?php the_title_rss(); ?>" ><h4><?php the_title_rss(); ?></h4></a>
 									<p class=""><?php the_excerpt(); ?></p>
 									<p class="">By <?php the_author(); ?> on <?php echo mysql2date('F d, Y', get_post_time('Y-m-d H:i:s', true), false); ?></p>

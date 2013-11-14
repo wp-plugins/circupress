@@ -340,6 +340,8 @@ This Template has a right sidebar with table of contents that can be configured 
 											?>
 										</ul>
 										
+										%%SIDEBAR%%
+										
 										<!-- social & contact -->
 										<table bgcolor="" class="social" width="100%">
 											<tr>

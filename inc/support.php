@@ -24,7 +24,7 @@ if (!current_user_can('manage_options'))  {
             	<div id="list_statistics" class="postbox" style="width:100%;">
                     <h3 class="hndle"><span>Getting Started</span></h3>
                     <div class="inside" style="padding: 0 15px">
-	                    <div id="pagedata" style="width:100%">
+	                    <div id="pagedata" class="supportpage">
 	                    	<h4>Welcome to CircuPress!</h4>
 	                    	<p>We wanted to provide you with a short tutorial here on how to setup your account.</p>
 	                    	<ol>
@@ -53,6 +53,10 @@ if (!current_user_can('manage_options'))  {
 	             			<li><strong>Shortcode</strong> - Syntax: You can set a horizontal or vertical layout, including the style tag.<br /><code>[circupress buttontext="Subscribe!" layout="horizontal" style="width:500px"]Be sure to sign up for updates![/circupress]</code></li>
 	             			<li><strong>Function</strong> - Syntax: You can set a horizontal or vertical layout, including the style tag.<br /><code>&lt;?php echo wpcp_circupressform( 'buttontext=&gt;"Subscribe!", style=&gt;"margin: 10px;", layout=&gt;"horizontal"', $content='Subscribe Today!' ); ?&gt;</code></li>
 	             		</ul>
+	             		<?php if ( class_exists( 'WPSEO_Sitemaps' )) { ?>
+	             		<h4>Search Engine Optimization</h4>
+	             		<p><strong>Warning:</strong> If you'd like to avoid the published emails from being indexed, we would encourage you to exclude Emails in the XML Sitemap settings of Yoast's SEO Plugin.</p>
+	             		<?php } ?>
 						</div>
 					</div>
 				</div>

@@ -4,7 +4,7 @@ CircuPress Ajax Subscription
 
 */
 jQuery(document).ready(function() {
-	jQuery('input.wpcp_submit').click(wpcp_subscribe_submit);
+	jQuery('input.wpcp_submit').click(wpcp_subscribe_submit());
 });
 
 function wpcp_subscribe_submit(){

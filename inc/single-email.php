@@ -97,87 +97,41 @@ if( isset( $_GET['p'] ) && strlen( $_GET['p'] ) > 0 ){
 	}
 	
 		
-	$wpcp_content = str_replace('</head>', '<style>#menu {
-    position: fixed;
-    height: 40px;
-    width: 100%;
-    top: 0;
-    left: 0;
-    border-top: 5px solid #4B9EC9;
-    background: #fff;
-    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    z-index: 100;
-}
+	$wpcp_content = str_replace('</head>', '<style>
+#menu { position: fixed; height: 60px; width: 100%; top: 0; left: 0; border-top: 2px solid #4B9EC9; background: #fff; -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16); -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16); box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16); z-index: 100; }
 	
-	.wpcp_show {
-		position: fixed;
-	    height: 30px;
-		width: 100px;
-	    top: 0px;
-		left: 80%;
-		border-bottom: 5px solid #4B9EC9;
-		border-left: 5px solid #4B9EC9;
-		border-right: 5px solid #4B9EC9;
-		color: #5a5a5a;
-		font-family: sans-serif;
-		font-size: 14px;
-		background: #fff;
-		text-align:center;
-		
-		
-	}
+.wpcp_show { position: fixed; height: 40px; width: 100px; top: 0px; left: 80%; border-bottom: 5px solid #4B9EC9; border-left: 5px solid #4B9EC9; border-right: 5px solid #4B9EC9; color: #5a5a5a; font-family: sans-serif; font-size: 15px; background: #fff; text-align:center; padding: 15px 0 0 0; }
 	
+input[type=text] { border-color: #dfdfdf;background-color: #fff; color: #333; -webkit-border-radius: 3px; border-radius: 3px; border-width: 1px; border-style: solid; margin: 1px; padding: 3px; line-height: 15px;}
 	
- 
-.w {
-    width: 900px;
-    margin: 0 auto;
-    margin-bottom: 40px;
-	text-align: center;
-	color: #5a5a5a;
-	font-family: sans-serif;
-	font-size: 14px;
-}
-.wpcp_hide {
-		position: fixed;
-	    height: 30px;
-		width: 100px;
-	    top: 0px;
-		left: 75%;
-		border-bottom: 5px solid #4B9EC9;
-		border-left: 5px solid #4B9EC9;
-		border-right: 5px solid #4B9EC9;
-		color: #5a5a5a;
-		font-family: sans-serif;
-		font-size: 14px;
-		background: #fff;
-		text-align:center;
-		z-index: 101;
-		
-	}
-<br type="_moz"></style>
+#send_preview { margin: 15px 0 15px 50px; }
 
+.button-primary { display:inline-block;text-decoration:none;font-size:12px;line-height:23px;height:24px;margin:0;padding:0 10px 1px;cursor:pointer;border-width:1px;border-style:solid;-webkit-border-radius:3px;-webkit-appearance:none;border-radius:3px;white-space:nowrap;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box; height: 30px; line-height: 28px; padding: 0 12px 2px; background-color:#21759b;background-image:-webkit-gradient(linear,left top,left bottom,from(#2a95c5),to(#21759b));background-image:-webkit-linear-gradient(top,#2a95c5,#21759b);background-image:-moz-linear-gradient(top,#2a95c5,#21759b);background-image:-ms-linear-gradient(top,#2a95c5,#21759b);background-image:-o-linear-gradient(top,#2a95c5,#21759b);background-image:linear-gradient(to bottom,#2a95c5,#21759b);border-color:#21759b;border-bottom-color:#1e6a8d;-webkit-box-shadow:inset 0 1px 0 rgba(120,200,230,.5);box-shadow:inset 0 1px 0 rgba(120,200,230,.5);color:#fff;text-decoration:none;text-shadow:0 1px 0 rgba(0,0,0,.1); }
+
+.button-secondary { margin: 15px 0; }
+ 
+.w { width: 900px; margin: 0 auto; margin-bottom: 40px; text-align: center; color: #5a5a5a; font-family: sans-serif; font-size: 14px; }
+
+.wpcp_hide { position: fixed; height: 40px; width: 100px; top: 0px; left: 75%; border-bottom: 5px solid #4B9EC9; border-left: 5px solid #4B9EC9; border-right: 5px solid #4B9EC9; color: #5a5a5a; font-family: sans-serif; font-size: 14px; background: #fff; text-align:center; z-index: 101; padding: 15px 0 0 0; }
+
+.wpcp_hide label, .wpcp_show label { cursor: pointer; font-weight: 600; }
+<br type="_moz"></style>
 
 </head>', $wpcp_content );
 	$wpcp_content = str_replace('</body>', '<div id="menu">
    <div id="send_preview" class="w">
-      <form action="" method="POST"><label>Send Preview Email To:</label><input type="text" name="email_address" size="40" />
+      <form action="" method="POST"><label>Send Preview Email To:</label>&nbsp;<input type="text" name="email_address" size="40" />
       	<input type="hidden" name="send_preview" value="1" />
       	<input type="hidden" name="campaign_url" value="//'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'" />
-      	<input type="submit" value="Send" />
+      	<input type="submit" class="button-primary" value="Send Email" />
       </form>
    </div>
-   
-   
-   
 </div>
 <div id="wpcp_show" class="wpcp_hide">
-	<label title="Show Preview Form" onclick="show_div();" style="margin-top:10px;" >Show</label>
+	<label title="Show Preview Form" onclick="show_div();">Show</label>
 </div>
 <div id="wpcp_hide" class="wpcp_hide">
-	<label title="Hide Preview Form" onclick="hide_div();" style="margin-top:10px;"  >Hide</label>
+	<label title="Hide Preview Form" onclick="hide_div();">Hide</label>
 </div>
 <script type="text/javascript">
     function hide_div() {
@@ -214,6 +168,5 @@ if( isset( $_GET['p'] ) && strlen( $_GET['p'] ) > 0 ){
 		<?php
 	}
 }
-
 
 ?>
