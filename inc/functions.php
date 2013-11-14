@@ -96,6 +96,9 @@ function wpcp_circupress_icons() {
 	#tabs ul li { list-style: none; display: inline; }
 	#tabs ul li a { border: 1px solid #d3e4ef; padding: 5px 8px 8px 8px; text-decoration: none; }
 	#tabs ul li.ui-tabs-active a { font-weight: bold; border-bottom: none; }
+	.supportpage { width: 100%; }
+	.supportpage p { margin-left: 10px; }
+	.supportpage ul, .supportpage ol { margin-left: 20px; }
     </style>
 <?php }
 
@@ -959,7 +962,7 @@ function wpcp_make_template_dir() {
 function wpcp_change_publish_button( $translation, $text ) {
 	if ( 'email' == get_post_type())
 		if ( $text == 'Publish' )
-		    return 'Schedule Email';
+		    return 'Send Email';
 		
 	return $translation;
 }
@@ -1452,13 +1455,12 @@ function wpcp_feed_circupress_daily(){
 		$link = get_permalink();
 		$thumb = get_the_post_thumbnail();
 		$excerpt = get_the_excerpt();
-	
+		set_post_thumbnail_size( 100, 100, true );
 		$wpcp_content_post .= '
 					<div class="content">	
 						<table bgcolor="">
 							<tr> 
-								<td class="small" width="20%" style="vertical-align: top; padding-right:10px;">'.$thumb.'</td>
-								<td>				
+								<td>'.$thumb.'				
 									<a href="'.$link.'" title="'.$title.'" ><h4>'.$title.'</h4></a>
 									<p class="">'.$excerpt.'</p>
 									<p class="">By '.the_author().' on '.mysql2date('F d, Y', get_post_time('Y-m-d H:i:s', true), false).'</p>
@@ -1642,13 +1644,14 @@ function wpcp_feed_circupress_weekly(){
 		$link = get_permalink();
 		$thumb = get_the_post_thumbnail();
 		$excerpt = get_the_excerpt();
+		set_post_thumbnail_size( 100, 100, true );
 	
 		$wpcp_content_post .= '
 					<div class="content">	
 						<table bgcolor="">
 							<tr> 
-								<td class="small" width="20%" style="vertical-align: top; padding-right:10px;">'.$thumb.'</td>
-								<td>				
+								<td>	
+									'.$thumb.'			
 									<a href="'.$link.'" title="'.$title.'" ><h4>'.$title.'</h4></a>
 									<p class="">'.$excerpt.'</p>
 									<p class="">By '.the_author().' on '.mysql2date('F d, Y', get_post_time('Y-m-d H:i:s', true), false).'</p>
