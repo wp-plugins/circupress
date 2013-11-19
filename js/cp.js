@@ -46,6 +46,8 @@ jQuery(document).ready(function($) {
 		customMedia = true;
 		wp.media.editor.send.attachment = function(props, attachment) {
 			if(customMedia) {
+				console.log(attachment.url);
+				console.log(button.prev('input').val());
 				button.prev('input').val(attachment.url);
 			} else {
 				return origSendAttachment.apply(this, [props, attachment] );

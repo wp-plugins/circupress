@@ -75,14 +75,14 @@ case 'update':
 
 case 'wpcp_head':
 	
-		if( isset( $_POST['wpcp_template_head'] ) && strlen( $_POST['wpcp_template_head'] ) > 0 && isset( $_POST['wpcp_header'] ) && strlen( $_POST['wpcp_header'] ) > 0 ){
+		if( isset( $_POST['wpcp_template_head'] ) && strlen( $_POST['wpcp_template_head'] ) > 0 && isset( $_POST['wpcp_header'] ) ){
 			
 			// Update/Insert the Header Value
 			update_option( $_POST['wpcp_template_head'], $_POST['wpcp_header'] );
 		
 		}
 		
-		if( isset( $_POST['wpcp_template_side'] ) && strlen( $_POST['wpcp_template_side'] ) > 0 && isset( $_POST['wpcp_header'] ) && strlen( $_POST['wpcp_header'] ) > 0 ){
+		if( isset( $_POST['wpcp_template_side'] ) && strlen( $_POST['wpcp_template_side'] ) > 0 ){
 			
 			// Update/Insert the Header Value
 			update_option( $_POST['wpcp_template_side'], $_POST['wpcp_sidebar'] );
