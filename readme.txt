@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 3.6
-Stable tag: 1.12
+Stable tag: 1.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,11 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 1.13 =
+* Corrected the issue with the auto submission of the widget form
+* Alphabetized the template listing
+* Corrected an issue where, if no header image was saved, the sidebar content could not be saved
+* Corrected an unreported issue where the image path could be saved to blank.
 = 1.12 = 
 * Corrected an issue with the header image not updating the path on the Customize Tab on the Editor.
 * Added an option to opt in your uploaded list to the daily or weekly subscription.
@@ -78,6 +83,9 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 1.13 =
+* Corrected header image and sidebar issue.
+* Corrected the issue with the auto submission of the widget form
 = 1.12 =
 * Corrected header image, template sidebar issue and various other minor cosmetic issues.
 = 1.11 =

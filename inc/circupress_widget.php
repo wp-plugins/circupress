@@ -75,7 +75,7 @@ class circupress_optin_widget extends WP_Widget {
 				$wpcp_sform .='</td>
 							</tr>'; }
 			$wpcp_sform .= '<tr>
-								<td colspan="2" style="text-align:right;"><input type="button" value="'.$circupress_button.'" id="wpcp_submit" name="btn_submit" class="wpcp_submit" /></td>
+								<td colspan="2" style="text-align:right;"><input type="button" value="'.$circupress_button.'" id="wpcp_submit" name="btn_submit" class="wpcp_submit" onclick="wpcp_subscribe_submit()" /></td>
 							</tr>
 				</table>';
 	} elseif ($circupress_layout == 'horizontal') {

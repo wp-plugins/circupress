@@ -338,6 +338,9 @@ function wpcp_get_template_files() {
 			closedir($dh);
 		}
 	}
+	
+	natsort($files);
+	
 	return $files;
 }
 
@@ -912,7 +915,7 @@ function wpcp_admin_tabs( $current = 'customize' ) {
 }
 
 function wpcp_include_template_function($template_path ) {
-	if ( get_post_type() == 'email' ) {
+	if ( get_post_type() == 'email' && get_post_status() != 'publish' ) {
 		if ( is_single() ) {
 			if ( $theme_file = locate_template( array( 'single-email.php' ) ) ) {
 				$template_path = $theme_file;
