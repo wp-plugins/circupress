@@ -7,10 +7,10 @@ include_once( 'lib/circupress_api.php' );
 include_once( 'lib/emogrifier.php' );
 
 // Require wpcp functions file
-require('inc/functions.php');
+require( 'inc/functions.php' );
 
 // Enable localization 
-load_plugin_textdomain('wpcp', $path = 'wp-content/plugins/circupress');
+load_plugin_textdomain( 'wpcp', $path = 'wp-content/plugins/circupress' );
 
 // Create Easy to use URL for Plugin Directory
 define ( 'WPCP_PLUGIN_URL', plugin_dir_url(__FILE__)); // with forward slash (/).

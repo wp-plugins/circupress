@@ -1,4 +1,4 @@
-<?
+<?php
 
 ############# CircuPress Email API File #######################
 

@@ -396,3 +396,4 @@ class Emogrifier {
         return $retArr;
     }
 }
+?>
