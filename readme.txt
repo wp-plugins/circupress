@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 3.6
-Stable tag: 1.14
+Stable tag: 1.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 1.15 = 
+* Corrected a script issue that was impacting other admin functions outside of the CircuPress functions
 = 1.14 = 
 * Corrected a PHP script tag that was breaking the plugin for many
 = 1.13 =
@@ -85,6 +87,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 1.15 = 
+* Corrected a script issue that was impacting other admin functions outside of the CircuPress functions
 = 1.14 = 
 * Corrected a PHP script tag that was breaking the plugin for many
 = 1.13 =
