@@ -14,6 +14,8 @@ CircuPress is a subscription service offering email marketing, email reporting a
 
 [CircuPress](http://www.circupress.com/?utm_source=plugin-readme&utm_medium=description&utm_campaign=1.0) is the only **email service provider** developed specifically for WordPress, designed and built by [Digital Home Info](http://www.digitalhomeinfo.com/) and [DK New Media](http://www.dknewmedia.com/). Manage subscribers and send compliant emails directly from your WordPress administrative panel.
 
+[vimeo http://vimeo.com/84545408]
+
 CircuPress Email Marketing features
 
 * Subscriber Management
