@@ -208,28 +208,26 @@ switch ( $wpcp_tab ){
 						<input type="hidden" name="wpcp_template_side" value="<?php echo $wpcp_template_side; ?>" />
 						<br />
 						<br />
+						<div 
 						<?php
 						
 							if(strpos(strtolower($wpcp_template_name),"sidebar")>0) {
-				
-								?>
-									
-									<h3><label for="<?php echo $wpcp_template_side; ?>">Email Sidebar HTML:</label></h3>
-									<div>
-										<?php
-											
-											wp_editor( $wpcp_sidebar, 'wpcp_sidebar' );
-										
-										?>
-									</div>
-								<?php
-								
-							}
-						
-						
+								echo '>';
+							} else {
+								echo 'style="display:none" >';
+							} 
+							
 						?>
-						
-						
+									
+							<h3><label for="<?php echo $wpcp_template_side; ?>">Email Sidebar HTML:</label></h3>
+							<div>
+								<?php
+											
+									wp_editor( stripslashes( $wpcp_sidebar ), 'wpcp_sidebar' );
+										
+								?>
+							</div>
+						</div>
 						
 						<p class="submit">
 								<?php submit_button( __( 'Update Template' ), 'primary', 'submit', false ); ?>
@@ -313,22 +311,14 @@ switch ( $wpcp_tab ){
 		} else {
 			$wpcp_content = str_replace('%%GOOGLE%%', '', $wpcp_content);
 		}
-		
-		// Extract CSS
-		$css = wpcp_get_css( $wpcp_content_post );
-		if( $css == '' ){
-			$css = '<style></style>';
-		}
-		
-		$e = new Emogrifier( $wpcp_content, $css);
 
-        $processedHTML = $e->emogrify();
-		$processedHTML = preg_replace ("'<!DOCTYPE[^>]*?>'si", "", $processedHTML);
+        $processedHTML = $wpcp_content;
+		/*$processedHTML = preg_replace ("'<!DOCTYPE[^>]*?>'si", "", $processedHTML);
 		$processedHTML = str_replace( '<html>', "", $processedHTML);
 		$processedHTML = preg_replace ("'<head[^>]*?>.*?</head>'si", "", $processedHTML);
 		$processedHTML = str_replace( '</html>', "", $processedHTML);
 		$processedHTML = str_replace( '<body', "<div", $processedHTML);
-		$processedHTML = str_replace( '</body', "</div", $processedHTML);
+		$processedHTML = str_replace( '</body', "</div", $processedHTML); */
 		echo $processedHTML;
 		echo '</div>';
 		echo '<div>&nbsp;</div>';

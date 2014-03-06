@@ -255,7 +255,7 @@ function wpcp_email_template_callback($args) {
 	$options = get_option('circupress-account'); 
 	$wpcp_email_template = $options['wpcp_email_template'];
 	$wpcp_template_id = "circupress-account[wpcp_email_template]";
-	echo wpcp_build_template_select($wpcp_template_id, $wpcp_email_template);
+	echo wpcp_build_template_select($wpcp_template_id, $wpcp_email_template, 'demand');
 	if( $wpcp_email_template == '0' ){
 		wpcp_notifications( 'alert', 'You have not selected a template for your Emails.' );
 	}
@@ -265,7 +265,7 @@ function wpcp_daily_template_callback($args) {
 	$options = get_option('circupress-account'); 
 	$wpcp_daily_template = $options['wpcp_daily_template'];
 	$wpcp_template_id = "circupress-account[wpcp_daily_template]";
-	echo wpcp_build_template_select($wpcp_template_id, $wpcp_daily_template);	
+	echo wpcp_build_template_select($wpcp_template_id, $wpcp_daily_template, 'schedule');	
 	if( $wpcp_daily_template == '0' ){
 		wpcp_notifications( 'alert', 'You are not sending Daily Digest Emails' );
 	}
@@ -307,7 +307,7 @@ function wpcp_weekly_template_callback($args) {
 	$options = get_option('circupress-account'); 
 	$wpcp_weekly_template = $options['wpcp_weekly_template'];
 	$wpcp_template_id = "circupress-account[wpcp_weekly_template]";
-	echo wpcp_build_template_select($wpcp_template_id, $wpcp_weekly_template);	
+	echo wpcp_build_template_select($wpcp_template_id, $wpcp_weekly_template, 'schedule');	
 	if( $wpcp_weekly_template == '0' ){
 		wpcp_notifications( 'alert', 'You are not sending Weekly Digest Emails' );
 	}
@@ -344,41 +344,82 @@ function wpcp_get_template_files() {
 	return $files;
 }
 
-function wpcp_build_template_select($wpcp_template_id, $wpcp_selected_template) {
+function wpcp_build_template_select($wpcp_template_id, $wpcp_selected_template, $filter = NULL) {
 	$dir = WPCP_TEMPLATE_BASE.'/';
 	$html = '';
 	
-	if (is_dir($dir)) {
-		if ($dh = opendir($dir)) {
+	$files = wpcp_get_template_files();
+	
+	// Build an array of the templates and names
+	
+	$selectoptions = array();
+				
+	foreach ($files as $file) {
 					
-			$select .= '<select id="'.$wpcp_template_id.'" name="'.$wpcp_template_id.'" >';
+		$file_handle = fopen($dir.$file, "r") or exit("Unable to open file!");
 			
-			$select .=  '<option value="0">Do Not Send</option>';
-				
-			while (($file = readdir($dh)) !== false ) {
-				
-				if($file != '.' && $file != '..'){
-					
-					$file_handle = fopen($dir.$file, "r") or exit("Unable to open file!");
-					while (!feof($file_handle)) {
+			while (!feof($file_handle)) {
 									
-						$line = fgets($file_handle);
-						if( substr($line, 0, 20) == 'CircuPress Template:'){
-							$select .= '<option value="'.$file.'"';
-							if( $file == $wpcp_selected_template ){
-								$select .= ' selected="selected" ';
+				$line = fgets($file_handle);
+					
+					if( substr($line, 0, 20) == 'CircuPress Template:'){
+					
+						if($filter != null) {
+						
+							$pos = strpos( $file, $filter);
+						
+							if( $pos !== false ) {
+							
+								$selectoptions[$i] = array('name' => substr($line, 21), 'file' => $file );	
+							
 							}
-							$select .= '>'.substr($line, 21).'</option>';
-						}
+						
+						} else {
+					
+							$selectoptions[$i] = array('name' => substr($line, 21), 'file' => $file );
+		
+						}	
 					}
-					fclose($file_handle);
 				}
-			}
-			closedir($dh);
-			$select .= '</select>';
+			
+			$i = $i + 1;
+					
+			fclose($file_handle);
+			
 		}
+		
+	// Build the select
+	
+	$select .= '<!-- '.$file.':'.$filter.'='.$pos.' -->';
+	
+	$select .= '<select id="'.$wpcp_template_id.'" name="'.$wpcp_template_id.'" >';	
+	
+	if($filter != 'demand') {
+	
+		$select .= '<option value="0">Do Not Send</option>';
+	
 	}
+	
+	usort($selectoptions, wpcp_build_sorter('name'));
+	
+	foreach($selectoptions as $option) {
+	
+		$select .= '<option value="'.$option['file'].'"';
+			
+		if( $file == $wpcp_selected_template ){ $select .= ' selected="selected" '; }
+		
+		$select .= '>'.$option['name'].'</option>';
+	}			
+			
+	$select .= '</select>';
+
 	return $select;
+}
+
+function wpcp_build_sorter($key) {
+    return function ($a, $b) use ($key) {
+        return strnatcmp($a[$key], $b[$key]);
+    };
 }
 
 function wpcp_email_header_callback($args) {
@@ -1294,22 +1335,30 @@ jQuery(document).ready( function($) {
 
 // Zendesk Support Tab
 function wpcp_admin_footer(){
-  echo '<script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
-<style type="text/css" media="screen, projection">
-  @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
-</style>
-<script type="text/javascript">
-  if (typeof(Zenbox) !== "undefined") {
-    Zenbox.init({
-      dropboxID:   "20251986",
-      url:         "https://circupress.zendesk.com",
-      tabTooltip:  "Ask CircuPress",
-      tabImageURL: "http://s1.circupress.com.s3.amazonaws.com/wp-content/uploads/2013/10/tab.png",
-      tabColor:    "#438DB4",
-      tabPosition: "Right"
-    });
-  }
-</script>';
+  echo "<script type='text/javascript'>
+
+var _ues = {
+host:'circupress.userecho.com',
+forum:'30406',
+lang:'en',
+tab_corner_radius:0,
+tab_font_size:20,
+tab_image_hash:'Q2lyY3VQcmVzcw%3D%3D',
+tab_chat_hash:'Y2hhdA%3D%3D',
+tab_alignment:'right',
+tab_text_color:'#FFFFFF',
+tab_text_shadow_color:'#00000055',
+tab_bg_color:'#438DB4',
+tab_hover_color:'#212121'
+};
+
+(function() {
+    var _ue = document.createElement('script'); _ue.type = 'text/javascript'; _ue.async = true;
+    _ue.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.userecho.com/js/widget-1.4.gz.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(_ue, s);
+  })();
+
+</script>";
 }
 
 // Shortcode to insert form into the page
@@ -1555,17 +1604,8 @@ function wpcp_feed_circupress_daily(){
 			$schedule = $days;
 		}
 		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_post_schedule', $schedule );
-		// Extract CSS
-		$css = wpcp_get_css( $wpcp_content_post );
-		if( $css == '' ){
-			$css = '<style></style>';
-		}
-		
-		$e = new Emogrifier( $wpcp_content_post, $css);
-
-        $processedHTML = $e->emogrify();
-		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $processedHTML);
-		
+	
+		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $wpcp_content_post); 
 			
 		// Update Post Content to have complete merged info
 		$wpcp_post = array(
@@ -1747,16 +1787,7 @@ function wpcp_feed_circupress_weekly(){
 		}
 		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_post_schedule', $schedule );
 			
-		// Extract CSS
-		$css = wpcp_get_css( $wpcp_content_post );
-		if( $css == '' ){
-			$css = '<style></style>';
-		}
-		
-		$e = new Emogrifier( $wpcp_content_post, $css);
-
-        $processedHTML = $e->emogrify();
-		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $processedHTML);
+		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $wpcp_content_post);
 			
 		// Update Post Content to have complete merged info
 		$wpcp_post = array(
@@ -1798,6 +1829,7 @@ function wpcp_on_demand_circupress( $wpcp_post_id ){
 	}
 	
 	//Get Post Info
+	remove_all_actions( 'the_content' );
 	$post_array = get_post( $wpcp_post_id, ARRAY_A );
 	$title = $post_array['post_title'];
 	$post_gmt = $post_array['post_date_gmt'];
@@ -1881,16 +1913,7 @@ function wpcp_on_demand_circupress( $wpcp_post_id ){
 	wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_sent', '0' );
 	wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_opened', '0');
 			
-	// Extract CSS
-	$css = wpcp_get_css( $wpcp_content_post );
-	if( $css == '' ){
-		$css = '<style></style>';
-	}
-
-	$e = new Emogrifier( $wpcp_content_post, $css);
-
-    $processedHTML = $e->emogrify();
-	$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $processedHTML);
+	$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $wpcp_content_post);
 			
 			
 			
@@ -2019,16 +2042,7 @@ function wpcp_email_preview( $wpcp_template ){
 	wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_sent', '0' );
 	wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_opened', '0');
 			
-	// Extract CSS
-	$css = wpcp_get_css( $wpcp_content_post );
-	if( $css == '' ){
-		$css = '<style></style>';
-	}
-			
-	$e = new Emogrifier( $wpcp_content_post, $css);
-
-    $processedHTML = $e->emogrify();
-	$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $processedHTML);
+	$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $wpcp_content_post);
 			
 	// Update Post Content to have complete merged info
 	$wpcp_post = array(

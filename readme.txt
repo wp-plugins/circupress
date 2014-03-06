@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 3.8
-Stable tag: 1.17
+Stable tag: 1.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,13 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 1.18 =
+* Updated the template downloads to alphabetical order
+* Updated the On Demand template selection and removed the option for Do Not Send
+* Filtered the template selection to the specific template type
+* Corrected an issue with the header upload
+* Updated the support and idea platform, the last one was confusing
+* Added confirmation messages 
 = 1.17 = 
 * Added video to plugin page
 = 1.16 = 

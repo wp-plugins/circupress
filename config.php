@@ -3,9 +3,6 @@
 // include Circupress API File
 include_once( 'lib/circupress_api.php' );
 
-// include CSS to Inline File
-include_once( 'lib/emogrifier.php' );
-
 // Require wpcp functions file
 require( 'inc/functions.php' );
 
