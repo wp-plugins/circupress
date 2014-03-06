@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 1.19 =
+* Updated a bug with the new template selection option
 = 1.18 =
 * Updated the template downloads to alphabetical order
 * Updated the On Demand template selection and removed the option for Do Not Send
