@@ -390,7 +390,7 @@ function wpcp_build_template_select($wpcp_template_id, $wpcp_selected_template, 
 		
 	// Build the select
 	
-	$select .= '<!-- '.$file.':'.$filter.'='.$pos.' -->';
+	$select .= '<!-- Selected: '.$wpcp_selected_template.' File:'.$file.' Filter:'.$filter.'='.$pos.' -->';
 	
 	$select .= '<select id="'.$wpcp_template_id.'" name="'.$wpcp_template_id.'" >';	
 	
