@@ -406,7 +406,7 @@ function wpcp_build_template_select($wpcp_template_id, $wpcp_selected_template, 
 	
 		$select .= '<option value="'.$option['file'].'"';
 			
-		if( $file == $wpcp_selected_template ){ $select .= ' selected="selected" '; }
+		if( $option['file'] == $wpcp_selected_template ){ $select .= ' selected="selected" '; }
 		
 		$select .= '>'.$option['name'].'</option>';
 	}			
