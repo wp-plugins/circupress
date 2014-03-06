@@ -4,16 +4,13 @@
 Plugin Name: CircuPress
 Plugin URI: http://www.circupress.com
 Description: CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from WordPress. CircuPress is fully compliant with email regulations and offers subscriber, bounce and campaign management directly from WordPress!
-Version: 1.17
+Version: 1.18
 Author: Adam Small, Douglas Karr, Stephen Coley
 Author URI: http://www.circupress.com/
 License: GPL2
 
 	Responsive email templates provided by Zurb:
 	Link: http://zurb.com/playground/responsive-email-templates
-	
-	Conversion of Style tags to Inline by Emogrifier (Source code is distributed under the MIT License).
-	Link: http://www.pelagodesign.com/sidecar/emogrifier/
 
 	CircuPress Copyright 2013 Douglas Karr, Adam Small (email: info@circupress.com)
 

@@ -81,18 +81,7 @@ if( isset( $_GET['p'] ) && strlen( $_GET['p'] ) > 0 ){
 	
 	if( isset( $_POST['send_preview'] ) && $_POST['send_preview'] == 1  && isset( $_POST['email_address'] ) && strlen( $_POST['email_address'] ) > 0 && isset( $_POST['campaign_url'] ) && strlen( $_POST['campaign_url'] ) > 0 ){
 		
-		// Extract CSS
-		$css = wpcp_get_css( $wpcp_content );
-		if( $css == '' ){
-			$css = '<style></style>';
-		}
-		
-		$e = new Emogrifier( $wpcp_content, $css);
-
-        $processedHTML = $e->emogrify();
-		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $processedHTML);
-		
-		wpcp_send_preview( $wpcp_apikey, $processedHTML, $_POST['email_address'] );
+		wpcp_send_preview( $wpcp_apikey, $wpcp_content, $_POST['email_address'] );
 		
 	}
 	
