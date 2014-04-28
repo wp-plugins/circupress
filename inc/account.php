@@ -21,10 +21,19 @@ if (!current_user_can('manage_options'))  {
 					// Validate API Key
 					$wpcp_api_validate = json_decode( wpcp_validate_api( stripslashes($wpcp_options['wpcp_apikey']) ), true );
 					
+					$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
+		
+					foreach( $lists as $list ){
+		
+						$wpcp_list_id = $list['list_id'];
+									
+					}
+					
 					if( $wpcp_api_validate['id'] == 0 ) { 
 					?>
 						<div id="message" class="updated">
 		        			<p><strong><?php _e('Your API Key is Valid!') ?></strong></p>
+		        			<p><strong>ListID: <?php echo $wpcp_list_id; ?></strong></p>
 		    			</div>
 					<?php 
 					} else { 
