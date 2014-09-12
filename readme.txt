@@ -1,18 +1,18 @@
 === CircuPress ===
 Contributors: cadamsmall, douglaskarr
-Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
+Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing, newsletters, deliverability, email service, email service provider, esp, newsletter service
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 1.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from WordPress.
+CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from your WordPress dashboard. Try it for free.
 
 == Description ==
 
-[CircuPress](http://www.circupress.com/?utm_source=plugin-readme&utm_medium=description&utm_campaign=1.0) is the only **email service provider** developed specifically for WordPress, designed and built by [Digital Home Info](http://www.digitalhomeinfo.com/) and [DK New Media](http://www.dknewmedia.com/). Manage subscribers and send compliant emails directly from your WordPress administrative panel.
+[CircuPress](http://www.circupress.com/?utm_source=plugin-readme&utm_medium=description&utm_campaign=1.0) is the only **email service provider** developed specifically for WordPress, designed and built by [Digital Home Info](http://www.digitalhomeinfo.com/) and [DK New Media](http://www.dknewmedia.com/). Manage subscribers and send compliant emails directly from your WordPress administrative panel. We send the emails from our mail servers to ensure you get reliable, fast and optimal delivery to your subscribers.
 
 [vimeo http://vimeo.com/84545408]
 
