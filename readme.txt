@@ -8,7 +8,7 @@ Stable tag: 1.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from your WordPress dashboard. Try it for free.
+Send beautiful, responsive newsletters with your latest posts to subscribers without lifting a finger. We even widgetized the subscription form!
 
 == Description ==
 
