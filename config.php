@@ -1,14 +1,5 @@
 <?php
 
-// include Circupress API File
-include_once( WPCP_PLUGIN_BASE . 'circupress/lib/circupress_api.php' );
-
-// Require wpcp functions file
-require( WPCP_PLUGIN_BASE . 'circupress/inc/functions.php' );
-
-// Enable localization 
-load_plugin_textdomain( 'wpcp', $path = 'wp-content/plugins/circupress' );
-
 // Create Easy to use URL for Plugin Directory
 define ( 'WPCP_PLUGIN_URL', plugin_dir_url(__FILE__)); // with forward slash (/).
 
@@ -21,5 +12,14 @@ $upload_directory = $upload_dir['basedir'];
 	
 // Set BASE Template Directory
 define( 'WPCP_TEMPLATE_BASE', $upload_directory.'/circupress_templates' );
+
+// include Circupress API File
+include_once( WPCP_PLUGIN_BASE . 'circupress/lib/circupress_api.php' );
+
+// Require wpcp functions file
+require( WPCP_PLUGIN_BASE . 'circupress/inc/functions.php' );
+
+// Enable localization 
+load_plugin_textdomain( 'wpcp', $path = 'wp-content/plugins/circupress' );
 
 ?>
