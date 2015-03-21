@@ -1,10 +1,10 @@
 <?php
 
 // include Circupress API File
-include_once( 'lib/circupress_api.php' );
+include_once( WPCP_PLUGIN_BASE . 'circupress/lib/circupress_api.php' );
 
 // Require wpcp functions file
-require( 'inc/functions.php' );
+require( WPCP_PLUGIN_BASE . 'circupress/inc/functions.php' );
 
 // Enable localization 
 load_plugin_textdomain( 'wpcp', $path = 'wp-content/plugins/circupress' );

@@ -3,8 +3,8 @@ Contributors: cadamsmall, douglaskarr
 Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing, newsletters, deliverability, email service, email service provider, esp, newsletter service
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
-Tested up to: 4.0
-Stable tag: 1.20
+Tested up to: 4.1.1
+Stable tag: 1.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 1.21 =
+* Updated include references that were causing init errors 
 = 1.19 =
 * Updated a bug with the new template selection option
 = 1.18 =
@@ -102,6 +104,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 1.21 = 
+* Corrected init error include references
 = 1.17 = 
 * Added video to plugin page. No need to upgrade.
 = 1.16 = 
