@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.1.1
-Stable tag: 1.21
+Stable tag: 2.00
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,19 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.00 =
+* Removed support tab and will be focused on support via the WordPress plugin forums and our site
+* Added report div on subscribers page for future charting and reporting
+* Added function to retrieve reports in the CircuPress API
+* New Templates - Added new On Demand and Scheduled Template
+* Made sure new templates include new loop fix (for daily and weekly)
+* Changed API endpoint to https://app.circupress.com
+* Added Setup Wizard in lightbox that is generated when required settings are not configured
+* Corrected an issue where plugin was authenticating on every CircuPress admin page load
+* Using WordPress Transient to cache result of authentication for 24 hours. This reduces the load on the server and prevents errors on the client server if there is an issue with the CircuPress servers
+* Hid the list selection on the widget
+* Removed Error on Account Settings page when checking API
+* Added a tracking pixel in the Administration that passes the administrative page to our Google Analytics account so we can track usage and improve behavior, no information regarding your domain or account are passed.
 = 1.21 =
 * Updated include references that were causing init errors 
 = 1.19 =
@@ -104,6 +117,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.00 =
+* This upgrade is a major upgrade with new templates and a simpler user interface with more descriptions so that users can configure the plugin easier.
 = 1.21 = 
 * Corrected init error include references
 = 1.17 = 

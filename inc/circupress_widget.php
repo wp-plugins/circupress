@@ -24,32 +24,32 @@ class circupress_optin_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-	
+
 		extract($args, EXTR_SKIP);
-		
+
 		$circupress_title =  apply_filters( 'widget_title', $instance['title'] );
 		$circupress_layout =  apply_filters( 'widget_title', $instance['layout'] );
 		$circupress_description =  apply_filters( 'widget_title', $instance['description'] );
 		$circupress_style =  apply_filters( 'widget_title', $instance['style'] );
 		$circupress_button =  apply_filters( 'widget_title', $instance['button'] );
-		
-		$options = get_option('circupress-account'); 
+
+		$options = get_option('circupress-account');
 		$wpcp_weekly_template = $options['wpcp_weekly_template'];
 		$wpcp_daily_template = $options['wpcp_daily_template'];
 		$circupress_list_id = $options['wpcp_circupress_list_id'];
-		
+
 		echo $before_widget;
-		
+
 		?>
-			
+
 			<?php echo $before_title.$circupress_title.$after_title; ?>
-			
+
 			<span id="wpcp_response"><?php echo $circupress_description; ?></span>
-			
+
 			<div id="circupress-container" style="<?php echo $circupress_style; ?>">
 
 			<?php
-			
+
 			$wpcp_sform = '<form action="" method="post" id="wpcp_subscribe_form">';
 	if ($circupress_layout == 'vertical') {
 		$wpcp_sform .= '<table border="0" style="text-align:center; margin-top: 10px;">
@@ -65,12 +65,12 @@ class circupress_optin_widget extends WP_Widget {
 								<td style="text-align:right;"><label for="wpcp_email_address">Email Address:</label></td>
 								<td style="text-align:left;"><input id="wpcp_email_address" name="wpcp_email_address" type="text" size="20" maxlength="255" /></td>
 							</tr>';
-		if( ($wpcp_daily_template != '0' ) || ($wpcp_weekly_template != '0')) { 
+		if( ($wpcp_daily_template != '0' ) || ($wpcp_weekly_template != '0')) {
 			$wpcp_sform .= '<tr>
 								<td style="text-align:right;">Receive:</td>';
 			if( $wpcp_daily_template != '0' ){
 				$wpcp_sform .='<td style="text-align:left;"><input type="checkbox" id="wpcp_daily_digest" name="wpcp_daily_digest"  /><label for="wpcp_daily_digest">Daily Digest</label><br />'; }
-			if( $wpcp_weekly_template != '0' ){		
+			if( $wpcp_weekly_template != '0' ){
 				$wpcp_sform .='<input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" /><label for="wpcp_weekly_digest">Weekly Digest</label>'; }
 				$wpcp_sform .='</td>
 							</tr>'; }
@@ -100,7 +100,7 @@ class circupress_optin_widget extends WP_Widget {
 				if( $wpcp_daily_template != '0' ){
 					$wpcp_sform .= '<input type="checkbox" id="wpcp_daily_digest" name="wpcp_daily_digest"  />
 									<label for="wpcp_daily_digest">Daily Digest</label>'; }
-				if( $wpcp_weekly_template != '0' ){		
+				if( $wpcp_weekly_template != '0' ){
 				$wpcp_sform .='&nbsp;<input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" />
 									<label for="wpcp_weekly_digest">Weekly Digest</label>';
 									}}
@@ -113,7 +113,7 @@ class circupress_optin_widget extends WP_Widget {
 	$wpcp_sform .= '<input type="hidden" name="runto" id="wpcp_runto" value="'.$wpcp_runto.'" />';
 	$wpcp_sform .= '<input type="hidden" name="list_id" value="'.$circupress_list_id.'" />';
 	$wpcp_sform .= '</form></div>';
-    
+
     echo $wpcp_sform;
 
 	echo $after_widget;
@@ -129,7 +129,7 @@ class circupress_optin_widget extends WP_Widget {
 		$instance['style'] = strip_tags( $new_instance['style'] );
 		$instance['button'] = strip_tags( $new_instance['button'] );
 		$instance['circupress_list_id'] = strip_tags( $new_instance['circupress_list_id'] );
-		
+
 		return $instance;
 	}
 
@@ -138,9 +138,9 @@ class circupress_optin_widget extends WP_Widget {
 		/* Set up some default widget settings. */
 		$defaults = array( 'title' => 'Join our Email List!', 'layout' => 'vertical', 'description' => '', 'style' => '' , 'button' => 'Subscribe!');
 		$instance = wp_parse_args( (array) $instance, $defaults );
-		
+
 		?>
-		 
+
 		<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
@@ -163,40 +163,41 @@ class circupress_optin_widget extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>" name="<?php echo $this->get_field_name( 'style' ); ?>" value="<?php echo $instance['style']; ?>" />
 		</p>
 		<p>
+			<!--
 		<label for="<?php echo $this->get_field_id( 'circupress_list_id' ); ?>">List:</label>
-		
-		
-		                    		
-		                    		<?php 
-		                    		
-		                    		$wpcp_api_key = stripslashes(get_option('wpcp_apikey') ); 
-									
+
+
+
+		                    		<?php
+
+		                    		$wpcp_api_key = stripslashes(get_option('wpcp_apikey') );
+
 		                    		$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
-								
+
 									if( isset( $lists['id'] ) and $lists['id'] == '401' ){
-										
+
 										echo '<h3>'.$lists['description'].'</h3>';
-										
+
 									} else {
-										
-										echo '<select class="widefat" name="wpcp_email_list">';	
-											
+
+										echo '<select class="widefat" name="wpcp_email_list">';
+
 										foreach( $lists as $list ){
-										
-									
+
+
 											echo '<option value="'.$list['list_id'].'">'.$list['list_name'].'</option>';
-									
+
 										}
-										
+
 										echo '</select>';
 									}
 									?>
-		                    		
-		
-		
-		
-		
-		</p>
+
+
+
+
+
+		</p> -->
 		<?php
 	}
 }

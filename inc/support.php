@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 *
 * CircuPress Support Page
 *
@@ -8,10 +8,13 @@
 if (!current_user_can('manage_options'))  {
 			wp_die( __('You do not have sufficient permissions to access this page.') );
 } else {
-	
+
+	// Verify the account is properly set up
+	wpcp_wizard();
+
 	// Get Users API Key
-	$wpcp_api_key = stripslashes(get_option('wpcp_apikey') ); 
-	
+	$wpcp_api_key = stripslashes(get_option('wpcp_apikey') );
+
 ?>
 <div class="wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-email"><br /></div><h2>CircuPress Support</h2>
@@ -19,7 +22,7 @@ if (!current_user_can('manage_options'))  {
 
 	<!-- Start the CircuPress Email -->
 	<div class="postbox-container" style="width:65%;">
-		<div class="metabox-holder">	
+		<div class="metabox-holder">
             <div class="meta-box-sortables">
             	<div id="list_statistics" class="postbox" style="width:100%;">
                     <h3 class="hndle"><span>Getting Started</span></h3>
@@ -35,7 +38,7 @@ if (!current_user_can('manage_options'))  {
 								<li>Move to the <a href="/wp-admin/edit.php?post_type=email&page=circupress-template">Editor tab</a> and <strong>customize your email template</strong> with your own header and, optional, sidebar.</li>
 								<li><strong>That's it!</strong> You're ready to send email with CircuPress.</li>
 	                    	</ol>
-	                    	
+
 	             		<h4>More info on Email Templates</h4>
 	             		<p>We've already supplied the necessary email templates to send a single email, a daily digest of your blog posts, and a weekly digest of your blog posts. Here's how they work:</p>
 	             		<ul style="list-style-type:circle; margin: 10px 0 10px 20px">
@@ -65,7 +68,7 @@ if (!current_user_can('manage_options'))  {
 	</div>
 
 	<div style="float:right;width:33%;">
-		<div class="metabox-holder">	
+		<div class="metabox-holder">
             <div class="meta-box-sortables">
             	<div id="list_statistics" class="postbox" style="width:100%;">
             		<h3 class="hndle"><span>CircuPress News &amp; Updates</span></h3>
@@ -78,8 +81,8 @@ if (!current_user_can('manage_options'))  {
 
 							if ( ! is_wp_error( $rss ) ) : // Checks that the object is created correctly
 
-    						// Figure out how many total items there are, but limit it to 5. 
-    						$maxitems = $rss->get_item_quantity( 5 ); 
+    						// Figure out how many total items there are, but limit it to 5.
+    						$maxitems = $rss->get_item_quantity( 5 );
 
     						// Build an array of all the items, starting with element 0 (first element).
     						$rss_items = $rss->get_items( 0, $maxitems );
@@ -103,7 +106,7 @@ if (!current_user_can('manage_options'))  {
 					</div>
 				</div>
 			</div>
-		</div>			
+		</div>
 	</div>
 </div>
 <?php } ?>
