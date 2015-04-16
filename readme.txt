@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.1.1
-Stable tag: 2.01
+Stable tag: 2.02
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.02 =
+* Corrected an issue with the request for the daily template
 = 2.01 =
 * Corrected an issue with the social links not properly setup in the new templates
 = 2.00 =
@@ -119,6 +121,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.02 =
+* Corrects an issue for proper population of the daily digest
 = 2.01 =
 * Corrected an issue with the social links not properly setup in the new templates
 = 2.00 =

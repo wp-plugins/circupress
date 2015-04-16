@@ -666,7 +666,7 @@ function wpcp_account_settings() {
 		'wpcp_settings_email_section',      // The name of the section to which this field belongs
 		array('')
 	);
-	
+
 	add_settings_field(
 		'wpcp_social_rss',             		// ID used to identify the field throughout the theme
 		'RSS Feed URL:',      				// The label to the left of the option interface element
@@ -693,7 +693,7 @@ function wpcp_account_settings() {
 		'wpcp_settings_social_section',     // The name of the section to which this field belongs
 		array('')
 	);
-	
+
 	add_settings_field(
 		'wpcp_social_instagram',            // ID used to identify the field throughout the theme
 		'Instagram Page URL:',      		// The label to the left of the option interface element
@@ -711,7 +711,7 @@ function wpcp_account_settings() {
 		'wpcp_settings_social_section',     // The name of the section to which this field belongs
 		array('')
 	);
-	
+
 	add_settings_field(
 		'wpcp_social_pinterest',            // ID used to identify the field throughout the theme
 		'Pinterest Page URL:',      		// The label to the left of the option interface element
@@ -729,7 +729,7 @@ function wpcp_account_settings() {
 		'wpcp_settings_social_section',     // The name of the section to which this field belongs
 		array('')
 	);
-	
+
 
 	add_settings_field(
 		'wpcp_social_youtube',             	// ID used to identify the field throughout the theme
@@ -923,13 +923,13 @@ function wpcp_checkemail($email) {
 
 function wpcp_social_rss($args) {
 	$options = get_option('circupress-account');
-	
+
 	if(strlen(stripslashes($options['wpcp_social_rss']))<1) {
 		$wpcp_feed = get_bloginfo('rss2_url');
 	} else {
 		$wpcp_feed = stripslashes($options['wpcp_social_rss']);
 	}
-	
+
 	$html = '<input type="text" id="circupress-account[wpcp_social_rss]" name="circupress-account[wpcp_social_rss]"  value="'.$wpcp_feed.'" />';
 	$html .= '<label for="wpcp_social_rss"> '  . $args[0] . '</label>';
 	echo $html;
@@ -1565,6 +1565,55 @@ function wpcp_init_feed_weekly(){
 
 }
 
+function wpcp_build_social($content){
+	$wpcp_rss = stripslashes( $wpcp_account_options['wpcp_social_rss'] );
+	$wpcp_fb = stripslashes( $wpcp_account_options['wpcp_social_fb'] );
+	$wpcp_twitter = stripslashes( $wpcp_account_options['wpcp_social_twitter'] );
+	$wpcp_google_plus = stripslashes( $wpcp_account_options['wpcp_social_google_plus'] );
+	$wpcp_linkedin = stripslashes( $wpcp_account_options['wpcp_social_linkedin'] );
+	$wpcp_instagram = stripslashes( $wpcp_account_options['wpcp_social_instagram'] );
+	$wpcp_pinterest = stripslashes( $wpcp_account_options['wpcp_social_pinterest'] );
+	$wpcp_youtube = stripslashes( $wpcp_account_options['wpcp_social_youtube'] );
+
+	$html = "";
+	$html .= '<table border="0" width="220" align="right" cellpadding="0" cellspacing="0" class="media"><tr>';
+	$html .= '<td><a href="%%ONLINE%%" target="_blank" style="color:#323f4e; text-decoration:none; font-family:\'Open Sans\', Source Sans Pro, arial, verdana, tahoma; font-size:14px;">View Online</a></td>';
+
+	$wpcp_plugin_image_path = 'http://plugin.circupress.com/wp-content/uploads/2015/04/';
+
+	if( strlen( $wpcp_rss ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_rss.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/rss.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_fb ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_fb.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/facebook.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_twitter ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_twitter.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/twitter.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_google_plus ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_google_plus.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/google.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_linkedin ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_linkedin.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/linkedin.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_instagram ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_instagram.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/instagram.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_pinterest ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_pinterest.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/pinterest.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+	if( strlen( $wpcp_youtube ) > 0 ){
+		$html .= '<td width="35"><a href="'.$wpcp_youtube.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/youtube.png" alt="facebook" style="border:none;" /></a></td>';
+	}
+
+	$html .= '</tr></table>';
+
+
+
+	return $html;
+
+}
+
 function wpcp_feed_circupress_daily(){
 
 	// Get Account Options
@@ -1610,7 +1659,9 @@ function wpcp_feed_circupress_daily(){
 					'posts_per_page' => 50,
 					'date_query' => array(
 						array(
-							'after'     => date('Y-m-d', strtotime('-1 days'))
+							'year'     => date('Y', strtotime('-'.$_GET['days'].' days')),
+							'month'    => date('m', strtotime('-'.$_GET['days'].' days')),
+							'day'      => date('d', strtotime('-'.$_GET['days'].' days'))
 						),
 						'inclusive' => true,
 					),
