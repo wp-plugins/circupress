@@ -1554,67 +1554,85 @@ add_shortcode("circupress", "wpcp_circupressform");
 function wpcp_init_feed_daily(){
 
 	// Initialize the Feed
-	add_feed('circupress-daily','wpcp_feed_circupress_daily');
+	add_feed('circupress-daily','wpcp_email_create');
 
 }
 
 function wpcp_init_feed_weekly(){
 
 	// Initialize the Feed
-	add_feed('circupress-weekly','wpcp_feed_circupress_weekly');
+	add_feed('circupress-weekly','wpcp_email_create');
 
 }
 
-function wpcp_build_social($content){
+function wpcp_init_feed_monthly(){
+
+	// Initialize the Feed
+	add_feed('circupress-weekly','wpcp_email_create');
+
+}
+
+function wpcp_build_social($wpcp_account_options, $float = "center"){
 	$wpcp_rss = stripslashes( $wpcp_account_options['wpcp_social_rss'] );
 	$wpcp_fb = stripslashes( $wpcp_account_options['wpcp_social_fb'] );
 	$wpcp_twitter = stripslashes( $wpcp_account_options['wpcp_social_twitter'] );
-	$wpcp_google_plus = stripslashes( $wpcp_account_options['wpcp_social_google_plus'] );
+	$wpcp_google = stripslashes( $wpcp_account_options['wpcp_social_google_plus'] );
 	$wpcp_linkedin = stripslashes( $wpcp_account_options['wpcp_social_linkedin'] );
 	$wpcp_instagram = stripslashes( $wpcp_account_options['wpcp_social_instagram'] );
 	$wpcp_pinterest = stripslashes( $wpcp_account_options['wpcp_social_pinterest'] );
 	$wpcp_youtube = stripslashes( $wpcp_account_options['wpcp_social_youtube'] );
 
-	$html = "";
-	$html .= '<table border="0" width="220" align="right" cellpadding="0" cellspacing="0" class="media"><tr>';
-	$html .= '<td><a href="%%ONLINE%%" target="_blank" style="color:#323f4e; text-decoration:none; font-family:\'Open Sans\', Source Sans Pro, arial, verdana, tahoma; font-size:14px;">View Online</a></td>';
+	$html = '<table align="left" border="0" width="100" cellpadding="0" cellspacing="0" class="single_column">';
+	$html .= '<tr height="35"><td valign="middle">';
+	$html .= '<a href="%%ONLINE%%" target="_blank" style="color:#323f4e; text-decoration:none; font-family:\'Open Sans\', Source Sans Pro, arial, verdana, tahoma; font-size:14px;">View Online</a>';
+	$html .= '</td></tr><tr height="10"><td>&nbsp;</td></tr>';
+	$html .= '</table>';
+	$html .= '<table border="0" width="220" align="'.$float.'" cellpadding="0" cellspacing="0" class="single_column">';
+	$html .= '<tr>';
+	
+	$wpcp_icon = 'http://plugin.circupress.com/wp-content/uploads/2015/04/';
 
-	$wpcp_plugin_image_path = 'http://plugin.circupress.com/wp-content/uploads/2015/04/';
-
-	if( strlen( $wpcp_rss ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_rss.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/rss.png" alt="facebook" style="border:none;" /></a></td>';
-	}
 	if( strlen( $wpcp_fb ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_fb.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/facebook.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_fb.'" target="_blank"><img src="'.$wpcp_icon.'facebook.png" alt="Facebook" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_twitter ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_twitter.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/twitter.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_twitter.'" target="_blank"><img src="'.$wpcp_icon.'twitter.png" alt="Twitter" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_google_plus ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_google_plus.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/google.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_google.'" target="_blank"><img src="'.$wpcp_icon.'google.png" alt="Google" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_linkedin ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_linkedin.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/linkedin.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_linkedin.'" target="_blank"><img src="'.$wpcp_icon.'linkedin.png" alt="LinkedIn" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_instagram ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_instagram.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/instagram.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_instagram.'" target="_blank"><img src="'.$wpcp_icon.'instagram.png" alt="Instagram" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_pinterest ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_pinterest.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/pinterest.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_pinterest.'" target="_blank"><img src="'.$wpcp_icon.'pinterest.png" alt="Pinterest" style="border:none;" /></a></td>';
 	}
 	if( strlen( $wpcp_youtube ) > 0 ){
-		$html .= '<td width="35"><a href="'.$wpcp_youtube.'" target="_blank"><img src="http://plugin.circupress.com/wp-content/uploads/2015/04/youtube.png" alt="facebook" style="border:none;" /></a></td>';
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_youtube.'" target="_blank"><img src="'.$wpcp_icon.'youtube.png" alt="YouTube" style="border:none;" /></a></td>';
 	}
-
-	$html .= '</tr></table>';
-
-
+	if( strlen( $wpcp_rss ) > 0 ){
+		$html .= '<td width="10">&nbsp;</td>';
+		$html .= '<td width="35"><a href="'.$wpcp_rss.'" target="_blank"><img src="'.$wpcp_icon.'rss.png" alt="RSS Feed" style="border:none;" /></a></td>';
+	}
+	$html .= '</tr><tr height="10"><td>&nbsp;</td></tr></table>';
 
 	return $html;
 
 }
 
-function wpcp_feed_circupress_daily(){
+function wpcp_email_create(){
+
+	$days = $_GET['days'];
 
 	// Get Account Options
 	$wpcp_account_options = get_option('circupress-account');
@@ -1642,9 +1660,34 @@ function wpcp_feed_circupress_daily(){
 	}
 
 	// Set the Schedule and Get the Template
-	$days = 1;
-	$wpcp_scheduled_template = $wpcp_daily_template;
-	$wpcp_subject = stripslashes($wpcp_account_options['wpcp_daily_subject']);
+	if( $days == 1 ){
+		$wpcp_scheduled_template = $wpcp_daily_template;
+		$wpcp_subject = stripslashes($wpcp_account_options['wpcp_daily_subject']);
+	} elseif( $days == 7 ){
+		$wpcp_scheduled_template = $wpcp_weekly_template;
+		$wpcp_subject = stripslashes($wpcp_account_options['wpcp_weekly_subject']);
+	} elseif( $days == 30 ){
+		$wpcp_scheduled_template = $wpcp_weekly_template;
+		$wpcp_subject = stripslashes($wpcp_account_options['wpcp_monthly_subject']);
+	} else {
+		$wpcp_scheduled_template = $wpcp_daily_template;
+		$wpcp_subject = stripslashes($wpcp_account_options['wpcp_daily_subject']);
+	}
+
+	$wpcp_args = array(
+		'post_status' => 'publish',
+		'posts_per_page' => 50,
+		'date_query' => array(
+			'after' => array(
+				'year'     => date('Y', strtotime('-'.$days.' days')),
+				'month'    => date('m', strtotime('-'.$days.' days')),
+				'day'      => date('d', strtotime('-'.$days.' days'))
+			),
+			'inclusive' => true,
+		),
+		'posts_per_page' => -1,
+	);
+
 	$wpcp_template = "wpcp_template_".substr($wpcp_scheduled_template,0,-4);
 	$wpcp_template_head = strtolower($wpcp_template."_header");
 	$wpcp_template_side = strtolower($wpcp_template."_sidebar");
@@ -1654,19 +1697,6 @@ function wpcp_feed_circupress_daily(){
 	$num_posts = 0;
 	$wpcp_content_post = '';
 	// Check to see if there have been posts in the last day.
-	$wpcp_args = array(
-					'post_status' => 'publish',
-					'posts_per_page' => 50,
-					'date_query' => array(
-						array(
-							'year'     => date('Y', strtotime('-'.$_GET['days'].' days')),
-							'month'    => date('m', strtotime('-'.$_GET['days'].' days')),
-							'day'      => date('d', strtotime('-'.$_GET['days'].' days'))
-						),
-						'inclusive' => true,
-					),
-					'posts_per_page' => -1,
-				);
 
 	$posts = new WP_Query( $wpcp_args );
 	while ( $posts->have_posts() ) : $posts->the_post();
@@ -1710,6 +1740,9 @@ function wpcp_feed_circupress_daily(){
 	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
 	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
 	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL%%', wpcp_build_social($wpcp_account_options, 'center'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_RIGHT%%', wpcp_build_social($wpcp_account_options, 'right'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
 
 	if( strlen( $wpcp_rss ) > 0 ){
 		$wpcp_rss_full = '<a href="'.$wpcp_rss.'" class="soc-btn rss">RSS</a>';
@@ -1795,225 +1828,12 @@ function wpcp_feed_circupress_daily(){
 		// Tell CP what schedule
 		if( $days == 1 ){
 			$schedule = 8;
-		} else {
-			$schedule = $days;
-		}
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_post_schedule', $schedule );
-
-		$processedHTML = preg_replace ("'<style[^>]*?>.*?</style>'si", "", $wpcp_content_post);
-
-		// Update Post Content to have complete merged info
-		$wpcp_post = array(
-    		'ID'           => $wpcp_post_id,
-      		'post_content' => $processedHTML,
-      		'post_status'   => 'publish'
-  		);
-
-		wp_update_post( $wpcp_post );
-
-		$wpcp_gmt = get_gmt_from_date( date('Y-m-d H:i:s') );
-		$wpcp_campaign_type = '8';
-
-		$lists = json_decode( wpcp_get_lists( stripslashes( $wpcp_apikey ) ), true );
-
-		if( isset( $lists['id'] ) and $lists['id'] == '401' ){
-
-
-		} else {
-
-			$wpcp_list_id = $lists[0]['list_id'];
-
-			// Create the campaign
-			wpcp_create_campaign( $wpcp_apikey, $wpcp_post_title, $wpcp_list_id, $wpcp_post_title, $wpcp_gmt, $wpcp_campaign_type, $wpcp_permalink, '2', $wpcp_campaign_id, $wpcp_content );
-
-		}
-	}
-
-}
-
-function wpcp_feed_circupress_weekly(){
-
-	// Get Account Options
-	$wpcp_account_options = get_option('circupress-account');
-	$wpcp_email_editor_options = get_option('circupress-email-editor');
-	$wpcp_email_schedule = stripslashes($wpcp_account_options['wpcp_email_schedule']);
-	$wpcp_weekly_template = stripslashes($wpcp_account_options['wpcp_weekly_template']);
-	$wpcp_daily_template = stripslashes($wpcp_account_options['wpcp_daily_template']);
-	$wpcp_on_demand_email_template = stripslashes( $wpcp_account_options['wpcp_email_template'] );
-	$wpcp_rss = stripslashes( $wpcp_account_options['wpcp_social_rss'] );
-	$wpcp_fb = stripslashes( $wpcp_account_options['wpcp_social_fb'] );
-	$wpcp_twitter = stripslashes( $wpcp_account_options['wpcp_social_twitter'] );
-	$wpcp_google_plus = stripslashes( $wpcp_account_options['wpcp_social_google_plus'] );
-	$wpcp_linkedin = stripslashes( $wpcp_account_options['wpcp_social_linkedin'] );
-	$wpcp_instagram = stripslashes( $wpcp_account_options['wpcp_social_instagram'] );
-	$wpcp_pinterest = stripslashes( $wpcp_account_options['wpcp_social_pinterest'] );
-	$wpcp_youtube = stripslashes( $wpcp_account_options['wpcp_social_youtube'] );
-	$wpcp_apikey = stripslashes($wpcp_account_options['wpcp_apikey']);
-
-	// Validate that the Campaign Comes from CircuPress
-	$wpcp_campaign_id = wpcp_fetch_campaign_id( $wpcp_apikey, $_GET['campaign_id'], '1' );
-
-	// Validate that the APIKey is present in the call. If not exit.
-	if( $wpcp_campaign_id != $_GET['campaign_id'] ){
-		exit();
-	}
-
-	// Set the Schedule and Get the Template
-	$days = 7;
-	$wpcp_scheduled_template = $wpcp_weekly_template;
-	$wpcp_subject = stripslashes($wpcp_account_options['wpcp_weekly_subject']);
-	$wpcp_template = "wpcp_template_".substr($wpcp_scheduled_template,0,-4);
-	$wpcp_template_head = strtolower($wpcp_template."_header");
-	$wpcp_template_side = strtolower($wpcp_template."_sidebar");
-	$wpcp_header_image = get_option( $wpcp_template_head );
-	$wpcp_sidebar = get_option( $wpcp_template_side );
-
-	$num_posts = 0;
-
-	// Check to see if there have been posts in the last day.
-	$wpcp_args = array(
-					'post_status' => 'publish',
-					'posts_per_page' => 50,
-					'date_query' => array(
-						array(
-							'after'     => date('Y-m-d', strtotime('-7 days'))
-						),
-						'inclusive' => true,
-					),
-					'posts_per_page' => -1,
-				);
-
-	$posts = new WP_Query( $wpcp_args );
-	while ( $posts->have_posts() ) : $posts->the_post();
-		$title = get_the_title();
-		$link = get_permalink();
-		$thumb = get_the_post_thumbnail();
-		$excerpt = get_the_excerpt();
-		set_post_thumbnail_size( 100, 100, true );
-
-		$wpcp_content_post .= '
-					<div class="content">
-						<table bgcolor="">
-							<tr>
-								<td>
-									'.$thumb.'
-									<a href="'.$link.'" title="'.$title.'" ><h4>'.$title.'</h4></a>
-									<p class="">'.$excerpt.'</p>
-									<p class="">By '.the_author().' on '.mysql2date('F d, Y', get_post_time('Y-m-d H:i:s', true), false).'</p>
-									<a href="'.$link.'" class="btn">Read More</a>
-								</td>
-							</tr>
-						</table>
-					</div>';
-		$num_posts++;
-	endwhile;
-
-	if( $num_posts > 0 ){
-		$wpcp_post_title = $wpcp_subject;
-	} else {
-		$wpcp_post_title = 'NO POSTS';
-	}
-
-	// Reset Wordpress
-	wp_reset_query();
-
-	// Get the Template Path
-	$wpcp_path = WPCP_TEMPLATE_BASE.'/'.$wpcp_scheduled_template;
-
-	// Get the email content
-	$wpcp_content = wpcp_include_file_to_var( $wpcp_path );
-
-	// Merge Tags
-	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
-	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
-	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
-
-	if( strlen( $wpcp_rss ) > 0 ){
-		$wpcp_rss_full = '<a href="'.$wpcp_rss.'" class="soc-btn rss">RSS</a>';
-		$wpcp_content = str_replace('%%RSS%%', $wpcp_rss_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%RSS%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_fb ) > 0 ){
-		$wpcp_fb_full = '<a href="'.$wpcp_fb.'" class="soc-btn fb">Facebook</a>';
-		$wpcp_content = str_replace('%%FACEBOOK%%', $wpcp_fb_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%FACEBOOK%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_twitter ) > 0 ){
-		$wpcp_tw_full = '<a href="'.$wpcp_twitter.'" class="soc-btn tw">Twitter</a>';
-		$wpcp_content = str_replace('%%TWITTER%%', $wpcp_tw_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%TWITTER%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_google_plus ) > 0 ){
-		$wpcp_google_plus_full = '<a href="'.$wpcp_google_plus.'" class="soc-btn gp">Google+</a>';
-		$wpcp_content = str_replace('%%GOOGLE%%', $wpcp_google_plus_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%GOOGLE%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_linkedin ) > 0 ){
-		$wpcp_linkedin_full = '<a href="'.$wpcp_linkedin.'" class="soc-btn li">LinkedIn</a>';
-		$wpcp_content = str_replace('%%LINKEDIN%%', $wpcp_linkedin_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%LINKEDIN%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_instagram ) > 0 ){
-		$wpcp_instagram_full = '<a href="'.$wpcp_instagram.'" class="soc-btn ig">Instagram</a>';
-		$wpcp_content = str_replace('%%INSTAGRAM%%', $wpcp_instagram_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%INSTAGRAM%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_pinterest ) > 0 ){
-		$wpcp_pinterest_full = '<a href="'.$wpcp_pinterest.'" class="soc-btn pi">Pinterest</a>';
-		$wpcp_content = str_replace('%%PINTEREST%%', $wpcp_pinterest_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%PINTEREST%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_youtube ) > 0 ){
-		$wpcp_youtube_full = '<a href="'.$wpcp_youtube.'" class="soc-btn yt">YouTube</a>';
-		$wpcp_content = str_replace('%%YOUTUBE%%', $wpcp_youtube_full, $wpcp_content);
-	} else {
-		$wpcp_content = str_replace('%%YOUTUBE%%', '', $wpcp_content);
-	}
-
-	if( $wpcp_post_title != 'NO POSTS' && isset( $_GET['make_post'] ) && strlen( $_GET['make_post'] ) > 0 && $_GET['make_post'] == 1 ){
-
-		// Create a Post to add the email to.
-		$wpcp_post = array(
-		  'post_title'    => $wpcp_post_title.' '.date('m/d/Y'),
-		  'post_content'  => '',
-		  'post_status'   => 'draft',
-		  'post_type'     => 'email'
-		);
-
-		$wpcp_post_id = wp_insert_post( $wpcp_post );
-
-		// Get Post Permalink
-		$wpcp_permalink = get_permalink( $wpcp_post_id );
-
-		// Merge Tags
-		$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
-		$wpcp_content_post = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content_post);
-
-		$wpcp_content_post = str_replace('%%FIRST_NAME%%', '', $wpcp_content_post);
-		$wpcp_content_post = str_replace('%%LAST_NAME%%', '', $wpcp_content_post);
-		$wpcp_content_post = str_replace('%%UNSUB%%', '', $wpcp_content_post);
-
-		// Add Report Metrics to the Meta Data of the Post
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_campaign_id', $wpcp_campaign_id );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_bounced', '0' );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_clicked', '0' );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_abuse_reports', '0' );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_unsubscribed', '0' );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_sent', '0' );
-		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_total_opened', '0' );
-
-		// Tell CP what schedule
-		if( $days == 1 ){
-			$schedule = 8;
-		} else {
+		} elseif( $days == 7 ) {
 			$schedule = date('w');
+		} elseif( $days == 30 ){
+			$schedule = '30';
+		} else {
+			$schedule = 1;
 		}
 		wpcp_meta_add_update( $wpcp_post_id, 'wpcp_post_schedule', $schedule );
 
@@ -2029,7 +1849,7 @@ function wpcp_feed_circupress_weekly(){
 		wp_update_post( $wpcp_post );
 
 		$wpcp_gmt = get_gmt_from_date( date('Y-m-d H:i:s') );
-		$wpcp_campaign_type = date('w');
+		$wpcp_campaign_type = $schedule;
 
 		$lists = json_decode( wpcp_get_lists( stripslashes( $wpcp_apikey ) ), true );
 
@@ -2044,10 +1864,10 @@ function wpcp_feed_circupress_weekly(){
 			wpcp_create_campaign( $wpcp_apikey, $wpcp_post_title, $wpcp_list_id, $wpcp_post_title, $wpcp_gmt, $wpcp_campaign_type, $wpcp_permalink, '2', $wpcp_campaign_id, $wpcp_content );
 
 		}
-
 	}
 
 }
+
 
 function wpcp_on_demand_circupress( $wpcp_post_id ){
 
@@ -2101,15 +1921,14 @@ function wpcp_on_demand_circupress( $wpcp_post_id ){
 
 	// Get Post Permalink
 	$wpcp_permalink = get_permalink( $wpcp_post_id );
-	$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
-	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
-	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
-	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
 
-	// Merge Online Link
 	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
 	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
 	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL%%', wpcp_build_social($wpcp_account_options, 'center'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_RIGHT%%', wpcp_build_social($wpcp_account_options, 'right'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
+	$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
 
 	if( strlen( $wpcp_rss ) > 0 ){
 		$wpcp_rss_full = '<a href="'.$wpcp_rss.'" class="soc-btn rss">RSS</a>';
@@ -2255,15 +2074,14 @@ function wpcp_email_preview( $wpcp_template ){
 
 	// Get Post Permalink
 	$wpcp_permalink = get_permalink( $wpcp_post_id );
-	$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
-	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
-	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
-	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
 
-	// Merge Online Link
 	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
 	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
 	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL%%', wpcp_build_social($wpcp_account_options, 'center'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_RIGHT%%', wpcp_build_social($wpcp_account_options, 'right'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
+	$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
 
 	if( strlen( $wpcp_rss ) > 0 ){
 		$wpcp_rss_full = '<a href="'.$wpcp_rss.'" class="soc-btn rss">RSS</a>';

@@ -145,20 +145,33 @@ default:
 <?php screen_icon(); ?>
 <h2><?php echo esc_html( $title ); ?></h2>
 
-<div class="fileedit-sub">
-	<div class="alignleft">
-		<big><?php
-			if ( is_writeable($real_file) ) {
-					echo sprintf(__('<strong>%s</strong>'), $wpcp_template_name);
-					echo sprintf(__(' <span>(%s)</span>'), $file);
-				} else {
-					echo sprintf(__('Browsing <strong>%s</strong>'), $file);
-				}
-			?></big>
-	</div>
-	<br class="clear" />
 	<p>Use the <strong>customize</strong> tab to make simple edits to your email template, including the header image and (optional) sidebar content. Advanced users can actually <strong>edit</strong> the email template (we recommend copying and making a new one). Don't worry about plugin updates, we won't overwrite your templates - we've put them safely in the uploads directory of WordPress.</p>
-</div>
+	
+	<big><?php _e('Your CircuPress Templates:'); ?></big>
+	
+	<p>Click on a template to make changes. You are working on the highlighted template.</p>
+
+	<ul style="margin-left: 10px">
+<?php
+foreach ( $template_files as $template_file_name => $template_file ) :
+
+	// Get the extension of the file
+	if ( preg_match('/\.([^.]+)$/', $template_file, $matches) ) {
+		$ext = strtolower($matches[1]);
+		// If extension is not in the acceptable list, skip it
+		if ( !in_array( $ext, $editable_extensions ) )
+			continue;
+	} else {
+		// No extension found
+		continue;
+	}
+	
+?>
+		<li<?php echo $file == $template_file ? ' class="highlight " style="font-weight:bold"' : ''; ?>><a href="edit.php?post_type=email&page=circupress-template&file=<?php echo urlencode( $template_file ) ?>"><?php echo $template_file_name.'<span class="nonessential"> ('.$template_file.')</span>'; ?></a></li>
+<?php
+
+	endforeach; ?>
+	</ul>
 
 <?php if ( $error ) :
 	echo '<div class="error"><p>' . __('Oops, no such file exists! Double check the name and try again, merci.') . '</p></div>';
@@ -290,31 +303,62 @@ switch ( $wpcp_tab ){
 		$wpcp_sidebar = get_option( $wpcp_template_side );
 
 		$wpcp_content = wpcp_include_file_to_var( WPCP_TEMPLATE_BASE.'/'.$file );
-		$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
 		$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
 		$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
 		$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
-		if( strlen( $wpcp_fb ) > 0 ){
-			$wpcp_fb_full = '<a href="'.$wpcp_fb.'" class="soc-btn fb">Facebook</a>';
-			$wpcp_content = str_replace('%%FACEBOOK%%', $wpcp_fb_full, $wpcp_content);
-
-		} else {
-			$wpcp_content = str_replace('%%FACEBOOK%%', '', $wpcp_content);
-		}
-		if( strlen( $wpcp_twitter ) > 0 ){
-			$wpcp_tw_full = '<a href="'.$wpcp_twitter.'" class="soc-btn tw">Twitter</a>';
-			$wpcp_content = str_replace('%%TWITTER%%', $wpcp_tw_full, $wpcp_content);
-
-		} else {
-			$wpcp_content = str_replace('%%TWITTER%%', '', $wpcp_content);
-		}
-		if( strlen( $wpcp_google_plus ) > 0 ){
-			$wpcp_google_plus_full = '<a href="'.$wpcp_google_plus.'" class="soc-btn gp">Google+</a>';
-			$wpcp_content = str_replace('%%GOOGLE%%', $wpcp_google_plus_full, $wpcp_content);
-
-		} else {
-			$wpcp_content = str_replace('%%GOOGLE%%', '', $wpcp_content);
-		}
+		$wpcp_content = str_replace('%%SOCIAL%%', wpcp_build_social($wpcp_account_options, 'center'), $wpcp_content);
+		$wpcp_content = str_replace('%%SOCIAL_RIGHT%%', wpcp_build_social($wpcp_account_options, 'right'), $wpcp_content);
+		$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
+		$wpcp_content = str_replace('%%ONLINE%%', $wpcp_permalink, $wpcp_content);
+		
+	if( strlen( $wpcp_rss ) > 0 ){
+		$wpcp_rss_full = '<a href="'.$wpcp_rss.'" class="soc-btn rss">RSS</a>';
+		$wpcp_content = str_replace('%%RSS%%', $wpcp_rss_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%RSS%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_fb ) > 0 ){
+		$wpcp_fb_full = '<a href="'.$wpcp_fb.'" class="soc-btn fb">Facebook</a>';
+		$wpcp_content = str_replace('%%FACEBOOK%%', $wpcp_fb_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%FACEBOOK%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_twitter ) > 0 ){
+		$wpcp_tw_full = '<a href="'.$wpcp_twitter.'" class="soc-btn tw">Twitter</a>';
+		$wpcp_content = str_replace('%%TWITTER%%', $wpcp_tw_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%TWITTER%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_google_plus ) > 0 ){
+		$wpcp_google_plus_full = '<a href="'.$wpcp_google_plus.'" class="soc-btn gp">Google+</a>';
+		$wpcp_content = str_replace('%%GOOGLE%%', $wpcp_google_plus_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%GOOGLE%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_linkedin ) > 0 ){
+		$wpcp_linkedin_full = '<a href="'.$wpcp_linkedin.'" class="soc-btn li">LinkedIn</a>';
+		$wpcp_content = str_replace('%%LINKEDIN%%', $wpcp_linkedin_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%LINKEDIN%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_instagram ) > 0 ){
+		$wpcp_instagram_full = '<a href="'.$wpcp_instagram.'" class="soc-btn ig">Instagram</a>';
+		$wpcp_content = str_replace('%%INSTAGRAM%%', $wpcp_instagram_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%INSTAGRAM%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_pinterest ) > 0 ){
+		$wpcp_pinterest_full = '<a href="'.$wpcp_pinterest.'" class="soc-btn pi">Pinterest</a>';
+		$wpcp_content = str_replace('%%PINTEREST%%', $wpcp_pinterest_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%PINTEREST%%', '', $wpcp_content);
+	}
+	if( strlen( $wpcp_youtube ) > 0 ){
+		$wpcp_youtube_full = '<a href="'.$wpcp_youtube.'" class="soc-btn yt">YouTube</a>';
+		$wpcp_content = str_replace('%%YOUTUBE%%', $wpcp_youtube_full, $wpcp_content);
+	} else {
+		$wpcp_content = str_replace('%%YOUTUBE%%', '', $wpcp_content);
+	}
 
         $processedHTML = $wpcp_content;
 		/*$processedHTML = preg_replace ("'<!DOCTYPE[^>]*?>'si", "", $processedHTML);
@@ -333,32 +377,6 @@ switch ( $wpcp_tab ){
 	break;
 }
 ?>
-
-</div>
-<div id="templateside" style="float;right;width:20%;padding-top:10px;">
-	<h3><?php _e('CircuPress Templates'); ?></h3>
-
-	<ul>
-<?php
-foreach ( $template_files as $template_file_name => $template_file ) :
-
-	// Get the extension of the file
-	if ( preg_match('/\.([^.]+)$/', $template_file, $matches) ) {
-		$ext = strtolower($matches[1]);
-		// If extension is not in the acceptable list, skip it
-		if ( !in_array( $ext, $editable_extensions ) )
-			continue;
-	} else {
-		// No extension found
-		continue;
-	}
-?>
-		<li<?php echo $file == $template_file ? ' class="highlight"' : ''; ?>><a href="edit.php?post_type=email&page=circupress-template&file=<?php echo urlencode( $template_file ) ?>"><?php echo $template_file_name.'<span class="nonessential">('.$template_file.')</span>'; ?></a></li>
-<?php
-
-	endforeach; ?>
-	</ul>
-
 
 </div>
 </div>

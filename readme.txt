@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.1.1
-Stable tag: 2.02
+Stable tag: 2.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,11 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.10 =
+* Rebuilt the method to insert your social links into the template.
+* Added the %%SOCIAL%% substitution string that needs to be enclosed in your table 
+settings.
+* Released an updated template that utilizes the social string
 = 2.02 =
 * Corrected an issue with the request for the daily template
 = 2.01 =
@@ -121,6 +126,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.10 =
+* Update your template for a rewritten, dynamic social links section in your On Demand and Digest emails
 = 2.02 =
 * Corrects an issue for proper population of the daily digest
 = 2.01 =

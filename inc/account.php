@@ -27,11 +27,11 @@ if (!current_user_can('manage_options'))  {
 
 					$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
 
-					foreach( $lists as $list ){
+					//foreach( $lists as $list ){
 
-						$wpcp_list_id = $list['list_id'];
+					//	$wpcp_list_id = $list['list_id'];
 
-					}
+					//}
 
 					if( $wpcp_api_validate['id'] == 0 ) {
 					?>
