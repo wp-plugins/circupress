@@ -28,8 +28,7 @@ CircuPress Email Marketing features
 * Scheduled Daily Digest
 * Scheduled Weekly Digest
 * Advanced Template Access
-* Helpdesk
-* Email Support
+* Social Link Integration
 * Deliverability
 
 For more information, check out [CircuPress](http://www.circupress.com/?utm_source=plugin-readme&utm_medium=description&utm_campaign=1.0 "Email for WordPress")
