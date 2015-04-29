@@ -1,7 +1,7 @@
 <?php
 /*
 
-CircuPress Template: Scheduled Single Column V2.1
+CircuPress Template: Scheduled Single Column V2.2
 Width: 600
 
 This Template is a Scheduled single column email. It displays all of the blog posts from either the last day or the last 7 days depending on the Circupress Schedule.
@@ -224,7 +224,7 @@ table[class="unsubscribe"] {text-align:right!important;}
           		<td height="50" class="space">&nbsp;</td>
         		</tr>
               <tr>
-                      <td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;">%%POST_TITLE%%</td>
+                      <td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;"><?php echo get_the_title(); ?></td>
               </tr>
               <tr>
           		<td height="50" class="space">&nbsp;</td>

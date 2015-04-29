@@ -92,6 +92,16 @@ case 'wpcp_head':
 
 		}
 	break;
+	
+case 'wpcp_remove':
+
+	if( isset( $_POST['template_file'] ) && strlen( $_POST['template_file'] ) > 0 ){
+	
+		wpcp_remove_template($_POST['template_file']);
+	
+	}
+
+	break;
 
 default:
 
@@ -137,6 +147,10 @@ default:
 <div class="wrap">
 <?php if (isset($_GET['a'])) : ?>
  <div id="message" class="updated"><p><?php _e('File edited successfully.') ?></p></div>
+ 
+<?php elseif (isset($_GET['r'])) : ?>
+ <div id="message" class="updated"><p><?php _e('Files removed successfully.') ?></p></div>
+
 <?php elseif (isset($_GET['phperror'])) : ?>
  <div id="message" class="updated"><p><?php _e('Editing the file resulted in a <strong>fatal error</strong>.') ?></p>
  </div>
@@ -149,7 +163,9 @@ default:
 	
 	<big><?php _e('Your CircuPress Templates:'); ?></big>
 	
-	<p>Click on a template to make changes. You are working on the highlighted template.</p>
+	<p>Click on a template to make changes. You are currently working on the highlighted template. If you wish to remove a template, check the box and click Remove Template.<br /><strong>Note:</strong> Deleting the latest distributed templates will cause them to be replaced rather than removed. If you delete a modified template, there is no way to restore it.</p>
+	
+	<form name="wpcp_template" id="wpcp_template" action="edit.php?post_type=email&page=circupress-template&r=true" method="post">
 
 	<ul style="margin-left: 10px">
 <?php
@@ -167,11 +183,19 @@ foreach ( $template_files as $template_file_name => $template_file ) :
 	}
 	
 ?>
-		<li<?php echo $file == $template_file ? ' class="highlight " style="font-weight:bold"' : ''; ?>><a href="edit.php?post_type=email&page=circupress-template&file=<?php echo urlencode( $template_file ) ?>"><?php echo $template_file_name.'<span class="nonessential"> ('.$template_file.')</span>'; ?></a></li>
+		<li<?php echo $file == $template_file ? ' class="highlight " style="font-weight:bold"' : ''; ?>> <input type="checkbox" name="template_file" value="<?php echo urlencode( $template_file ) ?>" /><a href="edit.php?post_type=email&page=circupress-template&file=<?php echo urlencode( $template_file ) ?>"><?php echo $template_file_name.'<span class="nonessential"> ('.$template_file.')</span>'; ?></a></li>
 <?php
 
 	endforeach; ?>
 	</ul>
+	
+	<input type="hidden" name="action" value="wpcp_remove" />
+	
+	<p class="submit">
+		<?php submit_button( __( 'Remove Templates' ), 'primary', 'submit', false ); ?>
+	</p>
+	
+	</form>
 
 <?php if ( $error ) :
 	echo '<div class="error"><p>' . __('Oops, no such file exists! Double check the name and try again, merci.') . '</p></div>';

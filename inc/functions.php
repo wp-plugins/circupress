@@ -1142,6 +1142,37 @@ function wpcp_make_template_dir() {
 	} // End Validate Template Directory
 }
 
+function wpcp_remove_template($templates) {
+
+	$dir = WPCP_PLUGIN_BASE.'circupress/templates/';
+
+	// Validate the Templates directory exists
+	if ( is_dir( $dir ) ) {
+		// Scan the Templates directory for files
+		$files = explode(",", $templates);
+
+		// Cycle through the Files
+		foreach( $files as $file ){
+		
+			unlink(WPCP_TEMPLATE_BASE.'/'.$file);
+
+			// Make sure we aren't working with . and ..
+			if($file != '.' && $file != '..'){
+
+				// See if the Template exists in the Uploads/Templates Directory. If Not then Copy
+				if ( !file_exists( WPCP_TEMPLATE_BASE.'/'.$file ) ) {
+
+					// File Does Not Exist - Copy
+					if ( !copy( WPCP_PLUGIN_BASE.'circupress/templates/'.$file, WPCP_TEMPLATE_BASE.'/'.$file ) ) {
+					    // Put some error Catching here!
+					} // End If Copy
+				} // End If File Exists
+			} // End If . ..
+		} // End For Each File
+	} // End Validate Template Directory	
+	
+}
+
 function wpcp_change_publish_button( $translation, $text ) {
 	if ( 'email' == get_post_type())
 		if ( $text == 'Publish' )
@@ -1589,7 +1620,7 @@ function wpcp_build_social($wpcp_account_options, $float = "center"){
 	$html .= '</table>';
 	$html .= '<table border="0" width="220" align="'.$float.'" cellpadding="0" cellspacing="0" class="single_column">';
 	$html .= '<tr>';
-	
+
 	$wpcp_icon = 'http://plugin.circupress.com/wp-content/uploads/2015/04/';
 
 	if( strlen( $wpcp_fb ) > 0 ){
@@ -1861,7 +1892,8 @@ function wpcp_email_create(){
 			$wpcp_list_id = $lists[0]['list_id'];
 
 			// Create the campaign
-			wpcp_create_campaign( $wpcp_apikey, $wpcp_post_title, $wpcp_list_id, $wpcp_post_title, $wpcp_gmt, $wpcp_campaign_type, $wpcp_permalink, '2', $wpcp_campaign_id, $wpcp_content );
+
+			wpcp_create_campaign( $wpcp_apikey, $wpcp_post_title, $wpcp_list_id, stripcslashes( $wpcp_post_title ), $wpcp_gmt, $wpcp_campaign_type, $wpcp_permalink, '2', $wpcp_campaign_id, $wpcp_content );
 
 		}
 	}
