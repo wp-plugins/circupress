@@ -3,8 +3,8 @@ Contributors: cadamsmall, douglaskarr
 Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing, newsletters, deliverability, email service, email service provider, esp, newsletter service
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
-Tested up to: 4.2.1
-Stable tag: 2.20
+Tested up to: 4.2.2
+Stable tag: 2.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.21 = 
+* Corrected an error with the widget list_id code
 = 2.20 =
 * Corrected a missing email subject in the scheduled email template.
 * Added the ability to remove templates. The latest templates will be renewed.
@@ -129,6 +131,8 @@ settings.
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.21 = 
+* Corrected an error with the widget list_id code
 = 2.20 =
 * Updated scheduled template that corrects the email subject. Added the ability to remove templates.
 = 2.10 =

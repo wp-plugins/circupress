@@ -162,42 +162,12 @@ class circupress_optin_widget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id( 'style' ); ?>">Additional Styling:</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>" name="<?php echo $this->get_field_name( 'style' ); ?>" value="<?php echo $instance['style']; ?>" />
 		</p>
-		<p>
-			<!--
-		<label for="<?php echo $this->get_field_id( 'circupress_list_id' ); ?>">List:</label>
-
-
-
-		                    		<?php
-
-		                    		$wpcp_api_key = stripslashes(get_option('wpcp_apikey') );
-
-		                    		$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
-
-									if( isset( $lists['id'] ) and $lists['id'] == '401' ){
-
-										echo '<h3>'.$lists['description'].'</h3>';
-
-									} else {
-
-										echo '<select class="widefat" name="wpcp_email_list">';
-
-										foreach( $lists as $list ){
-
-
-											echo '<option value="'.$list['list_id'].'">'.$list['list_name'].'</option>';
-
-										}
-
-										echo '</select>';
-									}
-									?>
-
-
-
-
-
-		</p> -->
+		<?php 
+			$wpcp_options = get_option('circupress-account');
+			$wpcp_api_key = stripslashes($wpcp_options['wpcp_apikey']);
+			$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
+		?>
+		<input type="hidden" name="wpcp_email_list" value="<?php echo $lists[0]['list_id']; ?>" />
 		<?php
 	}
 }
