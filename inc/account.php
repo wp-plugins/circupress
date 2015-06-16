@@ -25,7 +25,7 @@ if (!current_user_can('manage_options'))  {
 
 				if( isset($_GET['settings-updated']) ) {
 					// Validate API Key
-					$wpcp_api_validate = json_decode( wpcp_validate_api( stripslashes($wpcp_options['wpcp_apikey']) ), true );
+					$wpcp_api_validate = json_decode( wpcp_validate_api( stripslashes($wpcp_options['wpcp_apikey']), true ), true );
 
 					$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
 
