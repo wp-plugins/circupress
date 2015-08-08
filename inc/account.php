@@ -8,11 +8,10 @@
 if (!current_user_can('manage_options'))  {
 
 	wp_die( __('You do not have sufficient permissions to access this page.') );
-	
+
 } else {
 
-	// Verify the account is properly set up
-	wpcp_wizard();
+
 
 	$wpcp_settings = get_option('wpcp-settings');
 	$wpcp_options = get_option('circupress-account');
@@ -26,6 +25,8 @@ if (!current_user_can('manage_options'))  {
 				if( isset($_GET['settings-updated']) ) {
 					// Validate API Key
 					$wpcp_api_validate = json_decode( wpcp_validate_api( stripslashes($wpcp_options['wpcp_apikey']), true ), true );
+
+					//var_dump( $wpcp_api_validate );
 
 					$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
 
@@ -84,4 +85,10 @@ if (!current_user_can('manage_options'))  {
 				</form>
             </div>
     	<div class="clear"></div>
-<?php } ?>
+<?php
+
+	// Verify the account is properly set up
+	wpcp_wizard();
+
+
+} ?>

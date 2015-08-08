@@ -506,8 +506,8 @@ function wpcp_schedule_email_type_post( $api_key, $post_id, $post_gmt, $upload_d
 ### Validate API Key
 function wpcp_validate_api( $api_key , $api_update = NULL ){
 
-	// Check if the API has been validated in the last 24 hours
-	if ( false === ( get_transient( 'wpcp_api_validate' ) ) && $api_update == NULL ) {
+	if ( false === ( get_transient( 'wpcp_api_validate' ) ) || $api_update == true ) {
+		// Check if the API has been validated in the last 24 hours
 
 	     ### Pull in Global Variables
 		global $cp_options;
@@ -520,9 +520,11 @@ function wpcp_validate_api( $api_key , $api_update = NULL ){
 
 		);
 
-		set_transient( 'wpcp_api_validate', wpcp_curl($cp_options['api_url'], $post_options), 24 * HOUR_IN_SECONDS );
+		$validated = wpcp_curl($cp_options['api_url'], $post_options);
 
-		$result = get_transient( 'wpcp_api_validate' );
+		set_transient( 'wpcp_api_validate', $validated, 24 * HOUR_IN_SECONDS );
+
+		$result = $validated;
 
 	} else {
 

@@ -14,11 +14,7 @@ function wpcp_init() {
 }
 
 function wpcp_add_scripts() {
-	wp_enqueue_script(
-		'circupress',
-		WP_PLUGIN_URL . '/circupress/js/circupress.js',
-		array( 'jquery' )
-	);
+	wp_enqueue_script( 'circupress', WP_PLUGIN_URL . '/circupress/js/circupress.js', array( 'jquery' ) );
 }
 
 /*
@@ -290,6 +286,18 @@ function wpcp_daily_template_subject_callback($args) {
 	echo '<p class="description">This is the subject line for your automated daily digests.</p>';
 }
 
+function wpcp_weekly_template_callback($args) {
+	echo '<a name="weekly_template"></a>';
+	$options = get_option('circupress-account');
+	$wpcp_weekly_template = $options['wpcp_weekly_template'];
+	$wpcp_template_id = "circupress-account[wpcp_weekly_template]";
+	echo wpcp_build_template_select($wpcp_template_id, $wpcp_weekly_template, 'schedule');
+	if( $wpcp_weekly_template == '0' ){
+		wpcp_notifications( 'alert', 'You are not sending Weekly Digest Emails' );
+	}
+	echo '<p class="description">This is the template you wish to send your automated weekly digests in.</p>';
+}
+
 function wpcp_weekly_template_subject_callback($args) {
 	$options = get_option('circupress-account');
 	$wpcp_weekly_subject = $options['wpcp_weekly_subject'];
@@ -304,18 +312,6 @@ function wpcp_weekly_template_subject_callback($args) {
 		echo wpcp_notifications("success","");
 	}
 	echo '<p class="description">This is the subject line for your automated weekly digests.</p>';
-}
-
-function wpcp_weekly_template_callback($args) {
-	echo '<a name="weekly_template"></a>';
-	$options = get_option('circupress-account');
-	$wpcp_weekly_template = $options['wpcp_weekly_template'];
-	$wpcp_template_id = "circupress-account[wpcp_weekly_template]";
-	echo wpcp_build_template_select($wpcp_template_id, $wpcp_weekly_template, 'schedule');
-	if( $wpcp_weekly_template == '0' ){
-		wpcp_notifications( 'alert', 'You are not sending Weekly Digest Emails' );
-	}
-	echo '<p class="description">This is the template you wish to send your automated weekly digests in.</p>';
 }
 
 function wpcp_get_template_files() {
@@ -491,26 +487,26 @@ function wpcp_account_settings() {
 	$wpcp_api_validate = json_decode( wpcp_validate_api( $wpcp_apikey ), true );
 	if( $wpcp_api_validate['id'] == 0 ) {
 
-	add_settings_section(
-		 'wpcp_settings_email_section',		// ID used to identify this section and with which to register options
-		 'CircuPress Email Settings',     	// Title to be displayed on the administration page
-		 'wpcp_settings_email_callback', 	// Callback used to render the description of the section
-		 'circupress-account'     			// Page on which to add this section of options
-	);
+		add_settings_section(
+			 'wpcp_settings_email_section',		// ID used to identify this section and with which to register options
+			 'CircuPress Email Settings',     	// Title to be displayed on the administration page
+			 'wpcp_settings_email_callback', 	// Callback used to render the description of the section
+			 'circupress-account'     			// Page on which to add this section of options
+		);
 
-	add_settings_section(
-		 'wpcp_settings_schedule_section',	// ID used to identify this section and with which to register options
-		 'Templates and Scheduling',     	// Title to be displayed on the administration page
-		 'wpcp_settings_schedule_callback', // Callback used to render the description of the section
-		 'circupress-account'     			// Page on which to add this section of options
-	);
+		add_settings_section(
+			 'wpcp_settings_schedule_section',	// ID used to identify this section and with which to register options
+			 'Templates and Scheduling',     	// Title to be displayed on the administration page
+			 'wpcp_settings_schedule_callback', // Callback used to render the description of the section
+			 'circupress-account'     			// Page on which to add this section of options
+		);
 
-	add_settings_section(
-		 'wpcp_settings_social_section',	// ID used to identify this section and with which to register options
-		 'Social Media Settings',     		// Title to be displayed on the administration page
-		 'wpcp_settings_social_callback', 	// Callback used to render the description of the section
-		 'circupress-account'     			// Page on which to add this section of options
-	);
+		add_settings_section(
+			 'wpcp_settings_social_section',	// ID used to identify this section and with which to register options
+			 'Social Media Settings',     		// Title to be displayed on the administration page
+			 'wpcp_settings_social_callback', 	// Callback used to render the description of the section
+			 'circupress-account'     			// Page on which to add this section of options
+		);
 
 	}
 
@@ -565,7 +561,6 @@ function wpcp_account_settings() {
 
 	$wpcp_weekly_template = $options['wpcp_weekly_template'];
 	if( $wpcp_weekly_template != '0' ) {
-
 		add_settings_field(
 			'wpcp_weekly_subject',      		// ID used to identify the field throughout the theme
 			'Weekly Digest Subject:',       	// The label to the left of the option interface element
@@ -574,7 +569,8 @@ function wpcp_account_settings() {
 			'wpcp_settings_schedule_section',         	// The name of the section to which this field belongs
 			array('')
 		);
-
+	
+	
 		add_settings_field(
 			'wpcp_email_schedule',     			// ID used to identify the field throughout the theme
 			'Send my weekly email on:',   		// The label to the left of the option interface element
@@ -583,7 +579,6 @@ function wpcp_account_settings() {
 			'wpcp_settings_schedule_section',         	// The name of the section to which this field belongs
 			array('')
 		);
-
 	}
 
 	add_settings_field(
@@ -752,12 +747,19 @@ function wpcp_apikey_callback($args) {
 
 	$html = '<input type="text" id="circupress-account[wpcp_apikey]" name="circupress-account[wpcp_apikey]" value="'.$wpcp_apikey.'" />';
 	$html .= '<label for="wpcp_apikey"> '  . $args[0] . '</label>';
+
 	echo $html;
 
 	if( $wpcp_api_validate['id'] == 0 ) {
 		echo wpcp_notifications("success","");
 	} else {
 		echo wpcp_notifications("error","Invalid API Key");
+	}
+
+	$lists = json_decode( wpcp_get_lists( stripslashes( $wpcp_apikey ) ), true );
+
+	if(strlen($lists[0]['list_id'])>0) {
+		echo '<p class="description">Your List ID is '.$lists[0]['list_id'].'</p>';
 	}
 }
 
@@ -1116,7 +1118,7 @@ function wpcp_make_template_dir() {
 
 	### Check if the Default Templates Exists - If Not Then Copy Them From The Plugin
 	// Scan the Core Plugin Template Directory for Files
-	$dir = WPCP_PLUGIN_BASE.'circupress/templates/';
+	$dir = WPCP_PATH.'templates/';
 
 	// Validate the Templates directory exists
 	if ( is_dir( $dir ) ) {
@@ -1133,7 +1135,7 @@ function wpcp_make_template_dir() {
 				if ( !file_exists( WPCP_TEMPLATE_BASE.'/'.$file ) ) {
 
 					// File Does Not Exist - Copy
-					if ( !copy( WPCP_PLUGIN_BASE.'circupress/templates/'.$file, WPCP_TEMPLATE_BASE.'/'.$file ) ) {
+					if ( !copy( WPCP_PATH.'templates/'.$file, WPCP_TEMPLATE_BASE.'/'.$file ) ) {
 					    // Put some error Catching here!
 					} // End If Copy
 				} // End If File Exists
@@ -1144,7 +1146,7 @@ function wpcp_make_template_dir() {
 
 function wpcp_remove_template($templates) {
 
-	$dir = WPCP_PLUGIN_BASE.'circupress/templates/';
+	$dir = WPCP_PATH.'templates/';
 
 	// Validate the Templates directory exists
 	if ( is_dir( $dir ) ) {
@@ -1153,7 +1155,7 @@ function wpcp_remove_template($templates) {
 
 		// Cycle through the Files
 		foreach( $files as $file ){
-		
+
 			unlink(WPCP_TEMPLATE_BASE.'/'.$file);
 
 			// Make sure we aren't working with . and ..
@@ -1163,14 +1165,14 @@ function wpcp_remove_template($templates) {
 				if ( !file_exists( WPCP_TEMPLATE_BASE.'/'.$file ) ) {
 
 					// File Does Not Exist - Copy
-					if ( !copy( WPCP_PLUGIN_BASE.'circupress/templates/'.$file, WPCP_TEMPLATE_BASE.'/'.$file ) ) {
+					if ( !copy( WPCP_PATH.'templates/'.$file, WPCP_TEMPLATE_BASE.'/'.$file ) ) {
 					    // Put some error Catching here!
 					} // End If Copy
 				} // End If File Exists
 			} // End If . ..
 		} // End For Each File
-	} // End Validate Template Directory	
-	
+	} // End Validate Template Directory
+
 }
 
 function wpcp_change_publish_button( $translation, $text ) {
@@ -1460,7 +1462,7 @@ function wpcp_subscriber_optin(){
 	// Attempt to Subscribe the Email Address
 	$wpcp_subscriber_optin = json_decode( wpcp_add_list_subscriber( $wpcp_api_key, $wpcp_email_address, $wpcp_list_id, $wpcp_first_name, $wpcp_last_name, '', '', '', '', '', '', '', '', $wpcp_daily_digest, $wpcp_weekly_digest ), true );
 
-	echo '<span class="wpcp_subscribe_message">'.$wpcp_subscriber_optin['description'].'</span>';
+	echo '<span class="wpcp_subscribe_message">&nbsp;'.$wpcp_subscriber_optin['description'].'</span>';
 
 	die();
 
@@ -1501,82 +1503,60 @@ jQuery(document).ready( function($) {
 }
 }
 
-// Shortcode to insert form into the page
-function wpcp_circupressform( $atts, $content = null ) {
+// Build the form
+
+function wpcp_buildform($content = '', $layout = 'vertical', $buttontext = 'Subscribe', $style = '', $instance) {
 	$options = get_option('circupress-account');
 	$wpcp_weekly_template = $options['wpcp_weekly_template'];
 	$wpcp_daily_template = $options['wpcp_daily_template'];
-	$circupress_list_id = $options['wpcp_circupress_list_id'];
-
-	extract(shortcode_atts(array("layout" => 'vertical', "buttontext"=>"Subscribe", "style" => "text-align:left"), $atts, 'circupress'));
-
-	$wpcp_sform = '<span id="wpcp_response">'.$content.'</span>';
-
-	$wpcp_sform .= '<div id="circupress-container" style="'.$style.'">';
-	$wpcp_sform .= '<form action="" method="post" id="wpcp_subscribe_form">';
-	if ($layout == 'vertical') {
-		$wpcp_sform .= '<table cellpadding="4" border="0" style="text-align:center;margin-top: 10px;">
-							<tr>
-								<td style="text-align:right;"><label for="wpcp_first_name">First Name:</label></td>
-								<td style="text-align:left;"><input id="wpcp_first_name" name="wpcp_first_name" type="text" size="20" maxlength="255" /><input type="hidden" name="list_id" value="" /></td>
-							</tr>
-							<tr>
-								<td style="text-align:right;"><label for="wpcp_last_name">Last Name:</label></td>
-								<td style="text-align:left;"><input id="wpcp_last_name" name="wpcp_last_name" type="text" size="20" maxlength="255" /></td>
-							</tr>
-							<tr>
-								<td style="text-align:right;"><label for="wpcp_email_address">Email Address:</label></td>
-								<td style="text-align:left;"><input id="wpcp_email_address" name="wpcp_email_address" type="text" size="20" maxlength="255" /></td>
-							</tr>
-							<tr>
-								<td style="text-align:right;">Receive:</td>';
-		if( $wpcp_daily_template != '0' ){
-				$wpcp_sform .='<td style="text-align:left;"><input type="checkbox" id="wpcp_daily_digest" name="wpcp_daily_digest"  /><label for="wpcp_daily_digest">Daily Digest</label><br />'; }
-		if( $wpcp_weekly_template != '0' ){
-				$wpcp_sform .='<input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" /><label for="wpcp_weekly_digest">Weekly Digest</label>'; }
-				$wpcp_sform .='</td>
-							</tr>
-							<tr>
-								<td colspan="2" style="text-align:right;"><input type="button" value="'.$buttontext.'" id="wpcp_submit" name="btn_submit" class="wpcp_submit" /></td>
-							</tr>
-				</table>';
-	} elseif ($layout == 'horizontal') {
-		$wpcp_sform .= '<table cellpadding="4" width="'.$width.'" border="0" style="text-align:center;">
-							<tr>
-								<td style="text-align:left;">
-									<label for="wpcp_first_name">First Name:</label>&nbsp;
-									<input id="wpcp_first_name" name="wpcp_first_name" type="text" size="20" maxlength="255" /><input type="hidden" name="list_id" value="" />
-									<label for="wpcp_last_name">Last Name:</label>&nbsp;
-									<input id="wpcp_last_name" name="wpcp_last_name" type="text" size="20" maxlength="255" />
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align:left;">
-									<label for="wpcp_email_address">Email Address:</label>&nbsp;
-									<input id="wpcp_email_address" name="wpcp_email_address" type="text" size="30" maxlength="255" />
-								</td>
-							<tr>
-								<td style="text-align:left;">';
-			if(($wpcp_daily_template != '0')||($wpcp_weekly_template != '0')){
-				$wpcp_sform .= 'Receive:&nbsp;';
-				if( $wpcp_daily_template != '0' ){
-					$wpcp_sform .= '<input type="checkbox" id="wpcp_daily_digest" name="wpcp_daily_digest"  />
-									<label for="wpcp_daily_digest">Daily Digest</label>'; }
-				if( $wpcp_weekly_template != '0' ){
-				$wpcp_sform .='&nbsp;<input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" />
-									<label for="wpcp_weekly_digest">Weekly Digest</label>';
-									}}
-				$wpcp_sform .= '<input type="button" value="'.$buttontext.'" id="wpcp_submit" name="btn_submit" class="wpcp_submit" style="float:right" /></td>
-							</tr>
-				</table>';
-	}
-	$wpcp_sform .= '<input type="hidden" name="type" value="ADDSUB" />';
 	$wpcp_runto = admin_url('admin-ajax.php');
-	$wpcp_sform .= '<input type="hidden" name="runto" id="wpcp_runto" value="'.$wpcp_runto.'" />';
-	$wpcp_sform .= '<input type="hidden" name="list_id" value="'.$circupress_list_id.'" />';
-	$wpcp_sform .= '</form></div>';
-
+	$lists = json_decode( wpcp_get_lists( $wpcp_api_key ), true );
+	$circupress_list_id = $lists[0]['list_id'];
+	
+	$wpcp_sform = '<span class="wpcp_response">'.$content.'</span>';
+	$wpcp_sform .= '<div class="circupress-container">';
+	$wpcp_sform .= '<div class="'.$layout.'" style="'.$style.'">';
+	$wpcp_sform .= '<form action="" method="post" id="wpcp_subscribe_form">
+				<div class="field_div">
+					<label for="wpcp_first_name">First Name:</label>
+					<input id="wpcp_first_name" name="wpcp_first_name" type="text" size="20" maxlength="255" />
+				</div>
+				<div class="field_div">
+					<label for="wpcp_last_name">Last Name:</label>
+					<input id="wpcp_last_name" name="wpcp_last_name" type="text" size="20" maxlength="255" />
+				</div>
+				<div class="field_div">
+					<label for="wpcp_email_address">Email Address:</label>
+					<input id="wpcp_email_address" name="wpcp_email_address" type="text" size="20" maxlength="255" />
+				</div>';
+	if(( $wpcp_daily_template != '0' ) || ( $wpcp_weekly_template != '0' )) {
+		$wpcp_sform .= '<div class="field_div radio_div">';
+					if( $wpcp_daily_template != '0' ) {
+						$wpcp_sform .= '<input type="checkbox" id="wpcp_daily_digest" name="wpcp_daily_digest"  />
+						<label for="wpcp_daily_digest">Daily Digest</label>';
+					}
+					if( $wpcp_weekly_template != '0' ){
+						$wpcp_sform .= '<input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" />
+						<label for="wpcp_weekly_digest">Weekly Digest</label>';
+					}
+					$wpcp_sform .= '</div>';
+		}
+	$wpcp_sform .= '<div class="field_div button_div">
+				<input type="button" value="'.$buttontext.'" id="wpcp_submit" name="btn_submit" class="wpcp_submit" onclick="wpcp_subscribe_submit()" />
+				</div>
+				<input type="hidden" name="type" value="ADDSUB" />
+				<input type="hidden" name="runto" id="wpcp_runto" value="'.$wpcp_runto.'" />
+				<input type="hidden" name="list_id" value="'.$circupress_list_id.'" />
+			</form>
+		</div></div>';
     return $wpcp_sform;
+}
+
+// Shortcode to insert form into the page
+function wpcp_circupressform( $atts, $content = null ) {
+
+	extract(shortcode_atts(array("layout" => 'vertical', "buttontext" => "Subscribe", "style" => "text-align:left"), $atts, 'circupress'));
+    return wpcp_buildform($content, $layout, $atts['buttontext'], $style = 'text-align:left', 'shortcode');
 }
 
 add_shortcode("circupress", "wpcp_circupressform");
@@ -2222,5 +2202,9 @@ function wpcp_admin_footer(){
 	$p = urlencode($_SERVER['REQUEST_URI']);
 	echo '<iframe src="http://plugin.circupress.com/analytics.php?p='.$p.'" scrolling="no" frameborder="0" width="1" height="1"></iframe>';
 
+}
+
+function wpcp_add_head() {
+	echo '<link rel="stylesheet" type="text/css" href="'. WPCP_PLUGIN . 'css/circupress.css" />';
 }
 ?>

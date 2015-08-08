@@ -1,22 +1,39 @@
 <?php
 
-// Create Easy to use URL for Plugin Directory
-define ( 'WPCP_PLUGIN_URL', plugin_dir_url(__FILE__)); // with forward slash (/).
+if ( ! defined( 'WPCP_FILE' ) ) {
+	define( 'WPCP_FILE', __FILE__ );
+}
 
-// Create Plugin Base Path
-define ( 'WPCP_PLUGIN_BASE', str_replace( 'circupress/', '', plugin_dir_path( __FILE__ ) ) ); // contains the trailing slash (/)
+if ( ! defined( 'WPCP_PATH' ) ) {
+	define( 'WPCP_PATH', plugin_dir_path( WPCP_FILE ) );
+}
+
+if ( ! defined( 'WPCP_BASENAME' ) ) {
+	define( 'WPCP_BASENAME', plugin_basename( WPCP_FILE ) );
+}
+
+if ( ! defined( 'WPCP_PLUGIN' ) ) {
+	define( 'WPCP_PLUGIN', plugin_dir_url( WPCP_FILE ) );
+}
+
 
 // Add Thickbox
 add_thickbox();
 
 // include Circupress API File
-include_once( WPCP_PLUGIN_BASE . 'circupress/lib/circupress_api.php' );
+if ( file_exists( WPCP_PATH . '/lib/circupress_api.php' ) ) {
+	include_once WPCP_PATH . '/lib/circupress_api.php';
+}
 
 // Require wpcp functions file
-require( WPCP_PLUGIN_BASE . 'circupress/inc/functions.php' );
+if ( file_exists( WPCP_PATH . '/inc/functions.php' ) ) {
+	require WPCP_PATH . '/inc/functions.php';
+}
 
 // Include Wizard File
-include_once( WPCP_PLUGIN_BASE . 'circupress/inc/wizard.php' );
+if ( file_exists( WPCP_PATH . '/inc/wizard.php' ) ) {
+	include_once WPCP_PATH . '/inc/wizard.php';
+}
 
 // Enable localization
 load_plugin_textdomain( 'wpcp', $path = 'wp-content/plugins/circupress' );

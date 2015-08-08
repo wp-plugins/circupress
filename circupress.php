@@ -4,7 +4,7 @@
 Plugin Name: CircuPress
 Plugin URI: http://www.circupress.com
 Description: CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from WordPress. CircuPress is fully compliant with email regulations and offers subscriber, bounce and campaign management directly from WordPress!
-Version: 2.22
+Version: 2.30
 Author: Adam Small, Douglas Karr
 Author URI: http://www.circupress.com/
 License: GPL2
@@ -48,6 +48,7 @@ add_action( 'wp_ajax_nopriv_wpcp_subscriber_optin', 'wpcp_subscriber_optin' );
 add_action( 'admin_footer', 'wpcp_admin_footer_script' );
 add_action( 'admin_print_footer_scripts', 'wpcp_pointer_scripts' );
 add_action( 'wp_enqueue_scripts', 'wpcp_add_scripts' );
+add_action( 'wp_head', 'wpcp_add_head');
 add_filter( 'init','wpcp_init_feed_daily' );
 add_filter( 'init','wpcp_init_feed_weekly' );
 add_filter( 'init','wpcp_init_feed_monthly' );

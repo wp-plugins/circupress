@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.2.2
-Stable tag: 2.22
+Stable tag: 2.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,10 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.30 = 
+* Corrected an issue with the 2.1 templates and updated the form and form CSS to a tableless, responsive layout
+* Added meta tag in new template head to ensure noindex and nofollow by search engines
+* Updated the support page to pull a feed from our site’s knowledge base and news
 = 2.22 = 
 * If you obtain a new API key, the old key is cached and will not validate. This updates the cache when the account settings are saved.
 = 2.21 = 
@@ -133,6 +137,10 @@ settings.
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.30 = 
+* Corrected an issue with the 2.1 templates and updated the form and form CSS to a tableless, responsive layout
+* Added meta tag in new template head to ensure noindex and nofollow by search engines
+* Updated the support page to pull a feed from our site’s knowledge base and news
 = 2.22 = 
 * Corrected an issue with cached the cached validation of the API key
 = 2.21 = 

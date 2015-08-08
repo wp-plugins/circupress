@@ -1,7 +1,7 @@
 <?php
 /*
 
-CircuPress Template: Scheduled Single Column V2.1
+CircuPress Template: On Demand Single Column V2.2
 Width: 600
 
 This Template is a Scheduled single column email. It displays all of the blog posts from either the last day or the last 7 days depending on the Circupress Schedule.
@@ -23,6 +23,7 @@ The header image for this template should be 200x50
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="robots" content="noindex, nofollow" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
@@ -60,6 +61,8 @@ table[class="unsubscribe"] {text-align:right!important;}
 
 
 /* MEDIA QUIRES */
+
+
 
 @media only screen and (max-width:640px) {
 
@@ -224,7 +227,7 @@ table[class="unsubscribe"] {text-align:right!important;}
           		<td height="50" class="space">&nbsp;</td>
         		</tr>
               <tr>
-                      <td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;"><?php echo get_the_title(); ?></td>
+                      <td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;">%%POST_TITLE%%</td>
               </tr>
               <tr>
           		<td height="50" class="space">&nbsp;</td>
@@ -241,46 +244,47 @@ table[class="unsubscribe"] {text-align:right!important;}
         	 <tr>
           <td height="50" class="space">&nbsp;</td>
         </tr>
-        <tr>
-             <td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;">In Case You Missed Our Latest Posts:</td>
-        </tr>
-        <tr>
-          	<td height="50" style="border-bottom:1px solid #ddd;" class="hrule">&nbsp;</td>
-        </tr>
-        <tr>
-          <td height="50" class="space">&nbsp;</td>
-        </tr>
+        <?php
+
+			$wpcp_args = array(
+				'post_status' => 'publish',
+				'posts_per_page' => 5
+			);
+
+			$posts = new WP_Query( $wpcp_args );
+
+			if( $posts->have_posts() ):
+
+        		?>
+        			<tr>
+		          	<td align="left" valign="top" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:20px; font-weight:600; color:#323f4e;">In Case You Missed Our Latest Posts:</td>
+        			</tr>
+        			<tr>
+          			<td height="50" style="border-bottom:1px solid #ddd;" class="hrule">&nbsp;</td>
+        			</tr>
+        			<tr>
+          			<td height="50" class="space">&nbsp;</td>
+        			</tr>
+        		<?php
+			endif;
+			?>
+
             </table>
 
         </td>
         </tr>
 
+		<?php
 
-<?php
-	$wpcp_args = array(
-		'post_status' => 'publish',
-		'posts_per_page' => 25,
-		'date_query' => array(
-			'after' => array(
-				'year'     => date('Y', strtotime('-'.$_GET['days'].' days')),
-				'month'    => date('m', strtotime('-'.$_GET['days'].' days')),
-				'day'      => date('d', strtotime('-'.$_GET['days'].' days'))
-			),
-			'inclusive' => true,
-		),
-		'offset' => -1
-	);
+			$postnumber = 0;
 
-	$posts = new WP_Query( $wpcp_args );
+			while ( $posts->have_posts() ) : $posts->the_post();
 
-	$postnumber = 0;
+			$content = get_the_content();
+			$content = strip_tags($content);
+			$trimmed_content = wp_trim_words( $content, 30, '...' );
 
-	while ( $posts->have_posts() ) : $posts->the_post();
-		$content = get_the_content();
-		$content = strip_tags($content);
-		$trimmed_content = wp_trim_words( $content, 30, '...' );
-
-?>
+		?>
 
         <tr>
           <td valign="top">
