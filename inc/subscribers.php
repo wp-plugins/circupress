@@ -399,7 +399,7 @@ if (!current_user_can('manage_options'))  {
 									if( $wpcp_weekly_template != '0' ){
 										echo '<tr><td></td><td><label style="width:100px;text-align:right; float:left; display:block">Weekly Digest:&nbsp;</label> <input type="checkbox" id="wpcp_weekly_digest" name="wpcp_weekly_digest"  checked="checked" /></td></tr>';
 									} else {
-										echo '<tr><td></td><td>Weekly Digest is currently disabled. <a href="' . admin_url( 'edit.php?post_type=email&page=circupress-account#weekly_template', __FILE__ ) . '">Select a template</a> to enable a daily digest.<input type="hidden" name="wpcp_weekly_digest" value="0" /></td></tr>';
+										echo '<tr><td></td><td>Weekly Digest is currently disabled. <a href="' . admin_url( 'edit.php?post_type=email&page=circupress-account#weekly_template', __FILE__ ) . '">Select a template</a> to enable a weekly digest.<input type="hidden" name="wpcp_weekly_digest" value="0" /></td></tr>';
 									}
 								?>
 		   		                <tr>

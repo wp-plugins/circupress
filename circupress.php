@@ -4,7 +4,7 @@
 Plugin Name: CircuPress
 Plugin URI: http://www.circupress.com
 Description: CircuPress is a subscription service offering email marketing, email reporting and automated daily and weekly digests directly from WordPress. CircuPress is fully compliant with email regulations and offers subscriber, bounce and campaign management directly from WordPress!
-Version: 2.30
+Version: 2.31
 Author: Adam Small, Douglas Karr
 Author URI: http://www.circupress.com/
 License: GPL2

@@ -3,8 +3,8 @@ Contributors: cadamsmall, douglaskarr
 Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing, newsletters, deliverability, email service, email service provider, esp, newsletter service
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
-Tested up to: 4.2.2
-Stable tag: 2.30
+Tested up to: 4.2.4
+Stable tag: 2.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.31 = 
+* Corrected an issue with the header image upload script for the editor
 = 2.30 = 
 * Corrected an issue with the 2.1 templates and updated the form and form CSS to a tableless, responsive layout
 * Added meta tag in new template head to ensure noindex and nofollow by search engines
@@ -137,6 +139,8 @@ settings.
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.31 = 
+* Corrected an issue with the header image upload script for the editor
 = 2.30 = 
 * Corrected an issue with the 2.1 templates and updated the form and form CSS to a tableless, responsive layout
 * Added meta tag in new template head to ensure noindex and nofollow by search engines

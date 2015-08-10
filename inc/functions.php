@@ -1053,7 +1053,7 @@ function wpcp_admin_scripts() {
 		wp_enqueue_script('thickbox');
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'wp-pointer' );
-		wp_register_script('wpcp-upload', WPCP_PLUGIN_URL.'js/cp.js', array('jquery','media-upload','thickbox'));
+		wp_register_script('wpcp-upload', WPCP_PLUGIN.'js/cp.js', array('jquery','media-upload','thickbox'));
 		if( $_GET['post_type']=='email' && $_GET['page']=='circupress-template' ) {
 			wp_enqueue_script('wpcp-upload');
 		}

@@ -14,6 +14,8 @@ if ( is_multisite() && ! is_network_admin() ) {
 if ( !current_user_can('edit_themes') )
 	wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site.').'</p>');
 
+wp_enqueue_media();
+
 // Verify the account is properly set up
 wpcp_wizard();
 
@@ -229,7 +231,7 @@ switch ( $wpcp_tab ){
 						<h3>Header Image:</h3>
 						<?php if($file == "") { ?>
 						<input type="text" value="<?php echo $wpcp_header_image; ?>" id="wpcp_header" size="55" name="wpcp_header" />
-						<input type="button" class="cp_upload button-primary" value="<?php _e("Upload Header Image", 'wpcp'); ?>" />
+						<input type="button" class="cp_upload button-primary" value="<?php _e("Choose Image", 'wpcp'); ?>" />
 						<br /><span>Enter a new image location or upload an image from your computer.</span>
 
 						<?php } else { ?>
@@ -238,7 +240,7 @@ switch ( $wpcp_tab ){
 						<img src="<?php echo $wpcp_header_image; ?>" /></p>
 
 						<input type="text" value="<?php echo $wpcp_header_image; ?>" id="wpcp_header" size="55" name="wpcp_header" />
-						<input type="button" class="cp_upload button-primary" value="<?php _e("Change Header Image", 'wpcp'); ?>" />
+						<input type="button" class="cp_upload button-primary" value="<?php _e("Change Image", 'wpcp'); ?>" />
 						<br /><span>Enter the image location or upload an image from your computer.</span>
 
 						<?php } ?>
@@ -385,12 +387,6 @@ switch ( $wpcp_tab ){
 	}
 
         $processedHTML = $wpcp_content;
-		/*$processedHTML = preg_replace ("'<!DOCTYPE[^>]*?>'si", "", $processedHTML);
-		$processedHTML = str_replace( '<html>', "", $processedHTML);
-		$processedHTML = preg_replace ("'<head[^>]*?>.*?</head>'si", "", $processedHTML);
-		$processedHTML = str_replace( '</html>', "", $processedHTML);
-		$processedHTML = str_replace( '<body', "<div", $processedHTML);
-		$processedHTML = str_replace( '</body', "</div", $processedHTML); */
 		echo $processedHTML;
 		echo '</div>';
 		echo '<div>&nbsp;</div>';
