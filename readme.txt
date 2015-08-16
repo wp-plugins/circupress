@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.2.4
-Stable tag: 2.31
+Stable tag: 2.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.32 = 
+* Added standard image classes to the email templates
 = 2.31 = 
 * Corrected an issue with the header image upload script for the editor
 = 2.30 = 
@@ -139,6 +141,8 @@ settings.
 * Initial public release.
 
 == Upgrade Notice ==
+= 2.32 = 
+* Added standard image classes to the email templates
 = 2.31 = 
 * Corrected an issue with the header image upload script for the editor
 = 2.30 = 

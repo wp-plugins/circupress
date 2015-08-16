@@ -34,6 +34,9 @@ The header image for this template should be 200x50
 html {width:100%; height:100%;}
 body {margin:0; padding:0; width:100%; background:#fff; -webkit-text-size-adjust:none; -ms-text-size-adjust:none;}
 img {border:0;}
+img[class="alignleft"] { display: inline; float: left; margin-right: 5px; }
+img[class="alignright"] { display: inline; float: right; margin-left: 5px; }
+img[class="aligncenter"] { display: block; margin-right: auto; margin-left: auto; }
 table {border-collapse:collapse;}
 
 .ReadMsgBody { width: 100%;}
