@@ -3,7 +3,7 @@ Contributors: cadamsmall, douglaskarr
 Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing, newsletters, deliverability, email service, email service provider, esp, newsletter service
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
-Tested up to: 4.2.4
+Tested up to: 4.3.0
 Stable tag: 2.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
