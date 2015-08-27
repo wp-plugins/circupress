@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.3.0
-Stable tag: 2.34
+Stable tag: 2.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
