@@ -1746,6 +1746,9 @@ function wpcp_email_create(){
 
 	// Get the email content
 	$wpcp_content = wpcp_include_file_to_var( $wpcp_path );
+	
+	// Add WordPress auto formatting from text editor
+	$wpcp_content = wpautop($wpcp_content);
 
 	// Merge Tags
 	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);

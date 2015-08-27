@@ -59,24 +59,12 @@ if( isset( $_GET['p'] ) && strlen( $_GET['p'] ) > 0 ){
 	$wpcp_content = str_replace('%%POST_TITLE%%', $wpcp_post_title, $wpcp_content);
 	$wpcp_content = str_replace('%%HEADER%%', $wpcp_header_image, $wpcp_content);
 	$wpcp_content = str_replace('%%SIDEBAR%%', $wpcp_sidebar, $wpcp_content);
-	if( strlen( $wpcp_fb ) > 0 ){
-		$wpcp_fb_full = '<a href="'.$wpcp_fb.'" class="soc-btn fb">Facebook</a>';
-		$wpcp_content = str_replace('%%FACEBOOK%%', $wpcp_fb_full, $wpcp_content);			
-	} else {
-		$wpcp_content = str_replace('%%FACEBOOK%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_twitter ) > 0 ){
-		$wpcp_tw_full = '<a href="'.$wpcp_twitter.'" class="soc-btn tw">Twitter</a>';
-		$wpcp_content = str_replace('%%TWITTER%%', $wpcp_tw_full, $wpcp_content);		
-	} else {
-		$wpcp_content = str_replace('%%TWITTER%%', '', $wpcp_content);
-	}
-	if( strlen( $wpcp_google_plus ) > 0 ){
-		$wpcp_google_plus_full = '<a href="'.$wpcp_google_plus.'" class="soc-btn gp">Google+</a>';
-		$wpcp_content = str_replace('%%GOOGLE%%', $wpcp_google_plus_full, $wpcp_content);		
-	} else {
-		$wpcp_content = str_replace('%%GOOGLE%%', '', $wpcp_content);
-	}
+	$wpcp_content = str_replace('%%SOCIAL%%', wpcp_build_social($wpcp_account_options, 'center'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_RIGHT%%', wpcp_build_social($wpcp_account_options, 'right'), $wpcp_content);
+	$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
+	
+	// Add WordPress auto formatting from text editor
+	$wpcp_content = wpautop($wpcp_content);
 	
 	
 	if( isset( $_POST['send_preview'] ) && $_POST['send_preview'] == 1  && isset( $_POST['email_address'] ) && strlen( $_POST['email_address'] ) > 0 && isset( $_POST['campaign_url'] ) && strlen( $_POST['campaign_url'] ) > 0 ){

@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.3.0
-Stable tag: 2.32
+Stable tag: 2.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,12 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.35 = 
+* Corrected a bug with wpautop on single emails that are designed through the editor to ensure proper formatting
+= 2.34 = 
+* Added %%SOCIAL%%, %%SOCIAL_LEFT%%, and %%SOCIAL_RIGHT%% support to the single template.
+= 2.33 = 
+* Added wpautop on single emails that are designed through the editor to ensure proper formatting
 = 2.32 = 
 * Added standard image classes to the email templates
 = 2.31 = 
@@ -141,6 +147,13 @@ settings.
 * Initial public release.
 
 == Upgrade Notice ==
+== Changelog ==
+= 2.35 = 
+* Corrected a bug with wpautop on single emails that are designed through the editor to ensure proper formatting
+= 2.34 = 
+* Added %%SOCIAL%%, %%SOCIAL_LEFT%%, and %%SOCIAL_RIGHT%% support to the single template.
+= 2.33 = 
+* Added wpautop on single emails that are designed through the editor to ensure proper formatting
 = 2.32 = 
 * Added standard image classes to the email templates
 = 2.31 = 
