@@ -64,8 +64,10 @@ if( isset( $_GET['p'] ) && strlen( $_GET['p'] ) > 0 ){
 	$wpcp_content = str_replace('%%SOCIAL_LEFT%%', wpcp_build_social($wpcp_account_options, 'left'), $wpcp_content);
 	
 	// Add WordPress auto formatting from text editor
-	$wpcp_content = wpautop($wpcp_content);
+	$wpcp_content = wpautop( $wpcp_content );
 	
+	// Apply Shortcodes
+	$wpcp_content = do_shortcode( $wpcp_content );
 	
 	if( isset( $_POST['send_preview'] ) && $_POST['send_preview'] == 1  && isset( $_POST['email_address'] ) && strlen( $_POST['email_address'] ) > 0 && isset( $_POST['campaign_url'] ) && strlen( $_POST['campaign_url'] ) > 0 ){
 		
