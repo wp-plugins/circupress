@@ -1,7 +1,7 @@
 <?php
 /*
 
-CircuPress Template: On Demand Single Column V2.2
+CircuPress Template: On Demand Single Column V2.3
 Width: 600
 
 This Template is a Scheduled single column email. It displays all of the blog posts from either the last day or the last 7 days depending on the Circupress Schedule.

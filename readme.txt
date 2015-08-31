@@ -4,7 +4,7 @@ Tags: email, subscription, newsletter, email marketing, e-mail, e-mail marketing
 Donate link: http://www.circupress.com/
 Requires at least: 3.5.0
 Tested up to: 4.3.0
-Stable tag: 2.36
+Stable tag: 2.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Yes, CircuPress supports Multisite installs. If you wish to have different sendi
 8. Preview your templates in real-time.
 
 == Changelog ==
+= 2.37 = 
+* Updated the currently released templates to 2.3 to accommodate for shortcodes and auto formatting. 
 = 2.36 = 
 * Added shortcode support. You must apply any custom CSS utilized with your shortcodes in your email template, but in this case at least the shortcode will not display unrendered
 = 2.35 = 
@@ -150,6 +152,8 @@ settings.
 
 == Upgrade Notice ==
 == Changelog ==
+= 2.37 = 
+* Updated the currently released templates to 2.3 to accommodate for shortcodes and auto formatting. Please upgrade your templates.
 = 2.36 = 
 * Added shortcode support
 = 2.35 = 
