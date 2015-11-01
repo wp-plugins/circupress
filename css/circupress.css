@@ -1,0 +1,30 @@
+div.circupress-container .aligncenter {text-align:center; }
+div.circupress-container span { margin: 10px 0px; display: block; }
+div.circupress-container form { margin: 10px auto; }
+div.circupress-container .field_div { width: 100%; display: block; margin-top: 5px; }
+div.circupress-container .button_div { text-align: center; display: block; }
+div.circupress-container .field_div label { display: block; float: left; }
+div.circupress-container .field_div input { float: left; display: block; }
+div.circupress-container .field_div .button_div input{ width: 100px; margin: 0 auto; float: none; }
+div.circupress-container .radio_div { margin: 0 auto; display: block; }
+div.circupress-container .radio_div input { float: left; display: block; margin: 0 auto; }
+div.circupress-container .radio_div label { padding-left: 3px; }
+div.circupress-container .button_div input[type=button]{ margin: 10px auto 0; }
+div.circupress-container { margin:0 auto; }
+div.circupress-container #wpcp_subscribe_form { display:block; float: left; width: 100%; }
+
+/* add to FORM tag class "vertical" */
+div.circupress-container .vertical .radio_div { clear: both; }
+div.circupress-container .vertical .button_div { clear: both; margin-top: 10px; }
+div.circupress-container .vertical .field_div{ margin-top: 4px; width:100%; display:block; float:left; }
+div.circupress-container .vertical .field_div label { width: 100px; }
+div.circupress-container .button_div input[type=button]{ float: right; }
+div.circupress-container .vertical .check_full { width: 100%!important; float: left; }
+
+/* add to FORM tag class "horizontal" */
+div.circupress-container .horizontal .field_div input { margin: 0 5px 0 4px; }
+
+@media all and (max-width:631px){
+	div.circupress-container .horizontal .field_div.radio_div {margin-top:10px;}
+	div.circupress-container .horizontal .recieve_para { width: 55px;}
+}
