@@ -54,7 +54,7 @@ function wpcp_create_email_post_type() {
     'hierarchical' => false,
     'menu_position' => null,
     //'register_meta_box_cb' => 'add_events_metaboxes', To be used later
-    'supports' => array( 'title','editor','author' )
+    'supports' => array( 'title', 'editor', 'author', 'thumbnail')
   );
   register_post_type( 'email',$args);
 }

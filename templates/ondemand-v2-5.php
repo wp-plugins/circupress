@@ -1,7 +1,7 @@
 <?php
 /*
 
-CircuPress Template: On Demand Single Column V2.3
+CircuPress Template: On Demand Single Column V2.5
 Width: 600
 
 This Template is a Scheduled single column email. It displays all of the blog posts from either the last day or the last 7 days depending on the Circupress Schedule.
@@ -236,7 +236,14 @@ table[class="unsubscribe"] {text-align:right!important;}
           		<td height="50" class="space">&nbsp;</td>
         		</tr>
               <tr>
-                <td align="left" valign="middle" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:14px; line-height:21px; color:#323f4e;"><?php echo the_content(); ?></td>
+                <td align="left" valign="middle" style="font-family:'Open Sans', Source Sans Pro, arial, verdana, tahoma; font-size:14px; line-height:21px; color:#323f4e;">
+                <?php 
+                $wpcp_content = get_the_content();
+                $wpcp_content = apply_filters('the_content', $wpcp_content);
+				$wpcp_content = do_shortcode( $wpcp_content );
+                
+                echo $wpcp_content; ?>
+                </td>
               </tr>
               <tr>
                  <td>&nbsp;</td>
@@ -283,9 +290,11 @@ table[class="unsubscribe"] {text-align:right!important;}
 
 			while ( $posts->have_posts() ) : $posts->the_post();
 
-			$content = get_the_content();
-			$content = strip_tags($content);
-			$trimmed_content = wp_trim_words( $content, 30, '...' );
+			$wpcp_content = get_the_content();
+            $wpcp_content = apply_filters('the_content', $wpcp_content);
+			$wpcp_content = do_shortcode( $wpcp_content );
+			$wpcp_content = strip_tags($wpcp_content);
+			$trimmed_content = wp_trim_words( $wpcp_content, 30, '...' );
 
 		?>
 
